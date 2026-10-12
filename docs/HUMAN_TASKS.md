@@ -47,11 +47,24 @@ Implementation continues while this confirmation is pending, as permitted by Pha
 5. Use the safe-point and closure templates for source-backed values. Candidate sites
    remain `verified=N`. Missing verified evidence is allowed and yields UNKNOWN access.
 
-## Later gates
+## Phase 4 accepted and Phase 5 licensing decided — 2026-10-13
 
-- Before Phase 4: confirm safe points/closures, or explicitly proceed with UNKNOWN.
-- Before Phase 5: decide whether official boundaries/events may be redistributed.
+Raynald accepted the real results and framing. All access remains UNKNOWN with the
+verified-only defaults. The public plugin ZIP must exclude sample_data: DKI boundary
+and PPID redistribution permission is unconfirmed. This licensing decision is complete.
+`dist/km_flood_priority-local-data.zip` is separate, local and gitignored; attach it
+to the lecturer only if the lecturer permits it. Never commit or release that bundle.
+
+## Remaining human gates
+
+- Safe-point/closure verification can improve future runs; the accepted run proceeds
+  with UNKNOWN and makes no route safety claim.
 - Docker Desktop was started by the user. QGIS 3.44.15-noble was downloaded for development.
   For final Windows manual acceptance, install QGIS 3.44 LTR from [QGIS Downloads](https://qgis.org/download/).
-- Phase 6: perform the Windows acceptance and a clean-clone reproduction by another member.
+- Capture actual S1/S2 and the 30–60 second demo using [this checklist](figures/README.md).
+  Share the installation path/version when installed; the agent can then guide the
+  native run and incorporate the real screenshots into README.
+- Phase 6: another member performs a clean-copy reproduction; the group finalizes
+  the [brief draft](TECHNICAL_BRIEF.md) to at most two A4 pages and exports the PDF.
+  Public release/remote CI awaits a future change to the owner's no-push instruction.
 

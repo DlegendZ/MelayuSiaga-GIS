@@ -12,8 +12,11 @@ screenshots must still be performed by a group member.
    `dist/km_flood_priority-1.0.0.zip` and install it. The plugin menu has Run full
    pipeline…, Load sample data and Help; the Processing Toolbox has five algorithms.
 3. Drag `data/processed/inputs.gpkg` into QGIS and select its five layers. This build
-   excludes real sample data while redistribution terms are unresolved; Load sample
-   data explains this. Synthetic fixtures are not demonstration sample data.
+   excludes real sample data by Raynald's 2026-10-13 licensing decision; Load sample
+   data explains unresolved permission and points to
+   [README → Reproduce from scratch](../README.md#reproduce-from-scratch).
+   The separate local data ZIP may be attached to the lecturer only if authorized.
+   Synthetic fixtures are not demonstration sample data.
 4. Open KM Flood Priority → Run full pipeline…; select the inputs below, leave the
    thresholds at their documented defaults and choose a new output filename. Run.
 5. Open the result GeoPackage in a new project and select all layers. Check styles,
@@ -63,8 +66,19 @@ its provenance is retained in events.notes.
 | Windows ZIP install and native menu/toolbox interaction | Human pending |
 | Fresh-project styles, screenshots S1/S2 and clean-clone run by another member | Human pending |
 
-Capture S1: styled result map with legend and RW labels. Capture S2: pipeline parameters
-and successful result/log. Record QGIS version, tester, date and any correction in
+Capture S1: Processing Toolbox showing the provider and the pipeline dialog.
+Capture S2: styled result map with the rw_priority attribute table open.
+Record QGIS version, tester, date and any correction in
 `docs/PROGRESS.md`. These screenshots must come from the actual Windows acceptance;
 headless maps are not substituted for human UI screenshots.
+
+Save the actual screenshots as `docs/figures/S1_pipeline.png` and
+`docs/figures/S2_results.png`. A 30–60 second installation → pipeline → map demo
+can be saved as `demo.gif` or `demo.mp4` in that folder. Follow the
+[capture checklist](figures/README.md); README contains prepared embed slots.
+
+The accepted run gives RW 04/05 HIGH (16 episodes each), RW 07/08 MEDIUM (one
+episode each), and five NO_RECORD RW. RW 04/05 share 25 source rows for Jl. Kebon
+Pala II, RT 12–13 in RW 04 and RT 10–11 in RW 05. Counts must not be added across
+the paired RW and no whole-RW inundation is claimed. All access is UNKNOWN.
 

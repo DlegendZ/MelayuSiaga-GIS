@@ -37,7 +37,7 @@ def build_archive(output, *, include_sample_data=False, overwrite=False):
         relative = path.relative_to(source)
         if "__pycache__" in relative.parts or path.suffix in {".pyc", ".pyo"}:
             continue
-        if relative.parts[0] == "sample_data" and path.suffix != ".md" and not include_sample_data:
+        if relative.parts[0] == "sample_data" and not include_sample_data:
             continue
         files.append((path, f"km_flood_priority/{relative.as_posix()}"))
     output.parent.mkdir(parents=True, exist_ok=True)

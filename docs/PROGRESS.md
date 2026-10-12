@@ -213,3 +213,48 @@ authorizing Phase 5. The corrected real output now says `1 episode` for RW 07/08
 The 116 unit tests still pass, with 99.18% core coverage. Data stays local and
 uncommitted; no push. Phase 5 licensing was decided separately: public ZIP without
 sample_data, with unresolved DKI/PPID redistribution permission.
+## 2026-10-13 — Phase 5 local deliverables ready; human/remote gates pending
+
+- **Licensing decision §6.3 (Raynald): public ZIP WITHOUT sample_data.** DKI boundary
+  and PPID redistribution permission remains unconfirmed. The entire sample_data
+  directory is excluded from the default ZIP, including its README. Load sample data
+  now shows an information message with the reason and the exact README reproduction
+  heading/URL; no exception or layer addition occurs when the data is absent.
+- Prepared `dist/km_flood_priority-1.0.0.zip`: 60,244 bytes, one km_flood_priority/
+  root, no datasets/tests/bytecode/sample_data, CRC passes, below 10 MB. SHA-256:
+  `63e64e1e97d2b14fc9c00ea5d2da5e0ac49caa2ab6f37d117522ada89e0ea0ac`.
+- Prepared separate **local-only** `dist/km_flood_priority-local-data.zip`: 3,524,433
+  bytes; inputs.gpkg + events_all.csv + sources.csv, SHA-256 manifest and instructions.
+  All three extracted input files match their sources byte for byte. SHA-256:
+  `0ebe1cfb39a4836c16f077892fb9a9516a80330d0d04ff2309e4fa4bae560abb`.
+  Public distribution is explicitly false in the manifest. This bundle and all dist/
+  files remain gitignored; never commit or release the data bundle. Attach it to the
+  lecturer only if the lecturer permits it, as Raynald instructed.
+- Produced and visually inspected F1 locator, F2 priority map, and F3 method diagram
+  from real data. F1 uses 65 official indicative Jakarta Timur kelurahan polygons.
+  F2 includes the RT addresses, shared 25-source-row caution and whole-RW claim limit;
+  its caption includes historical context and both robustness checks. Attribution,
+  scale and north arrows are present. F3 uses explicit SVG arrowheads for PNG support.
+- Rewrote README in the required section order, with a Windows OSGeo4W/QGIS Python
+  path using standard library + bundled QGIS bindings and no extra packages. The
+  fetch_admin → metric bbox → fetch_osm → build_inputs sequence ends in inputs.gpkg.
+  Manual PDF URL/name/SHA-256, checked CSV transcription/registry/merge, current
+  input hashes and offline pipeline alternative are documented. Updated methodology,
+  source attribution/licensing, user guide, bundled help and human task list.
+- Prepared actual S1/S2/demo filenames and commented README embed slots, plus a
+  five-minute screenshot checklist and 30–60 second demo plan. S1/S2 are still pending
+  Windows captures; map exports are not labelled UI screenshots. Drafted the brief
+  using accepted real numbers for the humans' maximum two-page A4 layout; no final
+  brief PDF or product screenshot is claimed.
+- Verification: 116 unit tests pass; latest core coverage 99.18%. All 12 integration
+  tests pass on EACH of QGIS 3.44.15 and 4.2.3, including the missing-data message.
+  After excluding the full sample_data directory, ZIP activation/CLI tests were rerun
+  and passed on both versions. Ruff lint/format and Git whitespace checks pass.
+  SQLite integrity, preserved six NULL normalized impact pairs, four normalized
+  source-inconsistency notes, singular 1 episode, active documentation links and ZIP
+  exclusions passed the artifact audit. Accepted priority values remain unchanged.
+- **Phase 5 is not globally accepted yet:** native Windows manual testing/screenshots,
+  remote CI, tag/release and a release-based quick start remain pending. Remote actions
+  are deferred under the owner's commits-without-push instruction, not reported as
+  passing. Lecturer alignment, independent clean-copy reproduction and final brief
+  PDF also remain human gates. Local implementation/docs/artifacts are ready for them.

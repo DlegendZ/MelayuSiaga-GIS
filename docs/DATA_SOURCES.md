@@ -18,8 +18,13 @@ gitignored until redistribution terms are confirmed.
 | D7 | Cited event text / official bulletins | Verified road closures | Human curation pending |
 
 Keep one row per actual source in `data/clean/sources.csv`, using the source template.
-Public access does not establish permission to redistribute the dataset. Students
-must decide redistribution before Phase 5; exclude sample data while terms are unclear.
+Public access does not establish permission to redistribute the dataset.
+**Decision §6.3, Raynald 2026-10-13:** the public plugin ZIP excludes `sample_data`.
+DKI boundary and PPID redistribution permission has not been confirmed. Real working
+inputs and the separate `dist/km_flood_priority-local-data.zip` remain local and
+gitignored. The latter is for a lecturer attachment only if the lecturer authorizes
+it; it must not be committed or publicly released. The public build's Load sample
+data action explains this decision and points to README → Reproduce from scratch.
 
 ## Snapshot provenance
 
@@ -27,6 +32,7 @@ must decide redistribution before Phase 5; exclude sample data while terms are u
 |---|---|
 | `rw_kampung_melayu_20261012.geojson` | `3cc01656f67ae4fe8f4f7df32302b7580c2628882368db9ecf752d4e19c7ac6d` |
 | `kelurahan_kampung_melayu_20261012.geojson` | `f03e9d0091df14e62180774bc82dca910986956f0a897110ce37e4eb817670af` |
+| `jakarta_timur_kelurahan_20261013.geojson` | `b517ad6556e75ae3fea29c190067f3d2ada8b282650bb9e85f2f96e0c6b411c4` |
 | `REKAP_BANJIR_TAHUN_2025.pdf` | `d1f070b4460f79733b5290abf8857200884eaa4ab24db65665d38c2b767a9708` |
 
 Each raw snapshot has a `.meta.json` containing the full query, retrieval timestamp,
@@ -34,6 +40,11 @@ endpoint and checksum. The OSM bbox was derived by QGIS from the official bounda
 buffered by 1000 m in EPSG:32748, then transformed to EPSG:4326. The fetched bbox
 contains 4,483 road ways and 46,640 building ways before clipping; these are context
 features, not counts of populated houses or flood exposure.
+
+The 2026-10-13 locator acquisition queries D4 layer 85 with
+`wadmkk='JAKARTA TIMUR'`: 65 indicative kelurahan polygons in EPSG:32748. This is
+context for F1 only; it does not add event evidence or change the nine RW units.
+The study marker is derived from the Kampung Melayu boundary, not a surveyed point.
 
 Boundary validation in QGIS measured 47.989568 ha. The dissolved RW/boundary area
 ratio was 1.000000000008, within the required ±5%; the difference from the cited
@@ -46,8 +57,7 @@ candidate remains `verified=N`; these counts do not establish evacuation suitabi
 The accepted PPID table contains source dates in 2025 only, with direct RW labels
 04/05 and 07/08. Normalization yields 56 RW rows with zero schema errors and zero
 duplicates. All 28 source rows are Y/RW under the user-authorized delegated review
-exception documented in the execution spec. This is input acceptance, not priority
-findings. Each source row cites the PDF page, table and
+exception documented in the execution spec. Each source row cites the PDF page, table and
 source NO. Water-height qualifiers (Banjir/Genangan) are preserved in notes. Affected
 KK/people are shared source totals and cannot be summed over exploded RW copies.
 
@@ -93,4 +103,11 @@ is an acquisition-quality audit, not a flood-priority finding. No canonical Satu
 event CSV was created. These exports are excluded from the current PPID-only working
 set, with 2021/2022 unresolved availability and other limitations recorded explicitly.
 Future inclusion requires source resolution and a new acceptance, not inferred values.
+
+For context only, the publisher periods 2019–2020 list RW 04/05/07/08 in many 2020
+months, RW 01–03/06 within January–February 2020, and no explicit RW 09. The six
+2020 period rows list: January 01–08; February 03–08; March/April/September
+04/05/07/08; May 04/05/06/07/08. Dates remain unverified and none of these rows are
+used in classification. This shows that NO_RECORD and one episode in RW 07/08 are
+limitations of the accepted 2025 working set; it does not prove no flooding in RW 09.
 

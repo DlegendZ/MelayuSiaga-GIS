@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="340"
+viewBox="0 0 1100 340">
+<rect width="1100" height="340" fill="white"/>
+<g font-family="DejaVu Sans,sans-serif" text-anchor="middle" fill="#222">
+<text x="550" y="30" font-size="22" font-weight="bold">
+Recorded events → verification priority</text>
+<g fill="#eef4fa" stroke="#527795">
+<rect x="20" y="60" width="210" height="80" rx="8"/>
+<rect x="280" y="60" width="220" height="80" rx="8"/>
+<rect x="560" y="60" width="220" height="80" rx="8"/>
+<rect x="840" y="60" width="240" height="80" rx="8"/></g>
+<g font-size="17"><text x="125" y="91">Source event records</text>
+<text x="125" y="119">Accepted source review</text>
+<text x="390" y="91">Validate + normalize</text>
+<text x="390" y="119">Explode RW; retain NULL</text>
+<text x="670" y="91">Distinct episodes</text><text x="670" y="119">Keep depth separate</text>
+<text x="960" y="91">RW priority + reasons</text>
+<text x="960" y="119">Styled GeoPackage</text></g>
+<g stroke="#555" stroke-width="2" fill="none">
+<path d="M230 100 H275"/><path d="M500 100 H555"/><path d="M780 100 H835"/>
+<path d="M500 235 H810 V165 H960 V145"/></g>
+<g fill="#555"><path d="M275 95 L285 100 L275 105 Z"/>
+<path d="M550 95 L560 100 L550 105 Z"/>
+<path d="M830 95 L840 100 L830 105 Z"/>
+<path d="M955 150 L960 140 L965 150 Z"/></g>
+<rect x="280" y="190" width="220" height="85" rx="8" fill="#fff4d5" stroke="#ae914a"/>
+<text x="390" y="220" font-size="17">Metric OSM road graph</text>
+<text x="390" y="247" font-size="17">Verified-only access</text>
+<text x="770" y="227" font-size="16">Missing target/closure evidence → UNKNOWN</text>
+<text x="770" y="254" font-size="16">Scenario flags do not change classes</text>
+<text x="550" y="315" font-size="15">No recorded event (≠ safe). Accepted event years: 2025.
+All spatial processing: EPSG:32748.</text>
+</g></svg>

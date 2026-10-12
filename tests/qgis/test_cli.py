@@ -22,6 +22,7 @@ def test_zip_install_and_qgis_process_pipeline(synthetic_inputs, tmp_path):
         with zipfile.ZipFile(package) as archive:
             assert all(name.startswith("km_flood_priority/") for name in archive.namelist())
             assert not any(name.endswith((".pyc", ".gpkg")) for name in archive.namelist())
+            assert not any("/sample_data/" in name for name in archive.namelist())
             archive.extractall(plugins)
         environment = {
             **os.environ,

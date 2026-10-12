@@ -63,8 +63,13 @@ class KMFloodPriorityPlugin:
             QMessageBox.information(
                 self.iface.mainWindow(),
                 "Sample data unavailable",
-                "This build excludes real sample data while redistribution terms "
-                "are unresolved. Prepare inputs.gpkg using the repository guide.",
+                "Real sample data is excluded because redistribution permission for "
+                "DKI boundaries and PPID events has not been confirmed.\n\n"
+                "Prepare inputs.gpkg and the event/source CSVs by following README → "
+                "Reproduce from scratch → Windows with QGIS Python:\n"
+                "https://github.com/DlegendZ/MelayuSiaga-GIS#reproduce-from-scratch\n\n"
+                "In your local repository, open README.md at that heading. Then load "
+                "inputs.gpkg manually and select its layers in Run full pipeline….",
             )
             return
         loaded = []

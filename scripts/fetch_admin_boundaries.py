@@ -79,7 +79,35 @@ def main(argv=None):
     parser.add_argument(
         "--date", default=datetime.now(timezone(timedelta(hours=7))).strftime("%Y%m%d")
     )
+    parser.add_argument(
+        "--locator-only",
+        action="store_true",
+        help="Fetch official Jakarta Timur kelurahan polygons for the F1 locator",
+    )
     args = parser.parse_args(argv)
+    if args.locator_only:
+        service, _, _ = get_json(KEL_SERVICE, {"f": "json"})
+        candidates = service.get("layers", [])
+        if len(candidates) != 1:
+            raise ValueError("Kelurahan layer discovery is ambiguous")
+        layer_url = f"{KEL_SERVICE}/{candidates[0]['id']}"
+        result, raw, url, query = fetch_layer(layer_url, "wadmkk='JAKARTA TIMUR'")
+        if any(
+            feature["properties"]["wadmkk"] != "JAKARTA TIMUR" for feature in result["features"]
+        ):
+            raise ValueError("Locator response includes another municipality")
+        path = args.output_dir / f"jakarta_timur_kelurahan_{args.date}.geojson"
+        save_snapshot(
+            path,
+            raw,
+            url=url,
+            query=query,
+            feature_count=len(result["features"]),
+            purpose="F1 locator; indicative official boundaries",
+            crs="EPSG:32748",
+        )
+        print(f"Saved {len(result['features'])} official locator polygons: {path}")
+        return 0
     rw_where = select_area(RW_URL)
     rw, raw, url, query = fetch_layer(RW_URL, rw_where)
     numbers = validate_rw(rw)
