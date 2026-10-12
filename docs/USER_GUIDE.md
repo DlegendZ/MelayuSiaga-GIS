@@ -7,8 +7,11 @@ Phase 4. The operator was Claude under Raynald's instructions. S1/S2 are genuine
 Windows screenshots. S2 shows the package reopened before the automatic style fix.
 The first repaired ZIP failed Raynald's desktop style recheck (pipeline 1.2 s,
 28 source / 56 normalized rows, zero errors). The replacement retains callbacks
-at module level and passes two native Windows GUI regression paths; its desktop
-recheck is pending. The earlier same-context test did not cover wrapper lifetime.
+at module level and passes two native Windows GUI regression paths. **Desktop style
+recheck v2 PASSED on 2026-10-13 in 1.16 s**, operated by Claude on Raynald's laptop
+under his instructions, with five callback entries, five restored styles and
+categorized priority without reopening. The earlier same-context test did not cover
+wrapper lifetime. Both the failure and the successful replacement are preserved.
 
 ## Install and run on Windows
 
@@ -74,7 +77,8 @@ its provenance is retained in events.notes.
 | Menu lifecycle across two reloads | Automated interface test pass |
 | Windows operation and reopened-package styles; S1/S2 | Reported by Raynald, operated by Claude under his instructions |
 | First repaired ZIP desktop style recheck | FAILED on Windows 3.44.15; pipeline data succeeded in 1.2 s |
-| Replacement ZIP desktop recheck; independent clean-copy run | Pending |
+| Replacement ZIP desktop style recheck v2 | PASSED; 1.16 s; five callbacks/restored styles; no reopening |
+| Independent clean-copy run by another member | Pending |
 
 Capture S1: Processing Toolbox showing the provider and the pipeline dialog.
 Capture S2: styled result map with the rw_priority attribute table open.
@@ -82,11 +86,15 @@ Record QGIS version, tester, date and any correction in
 `docs/PROGRESS.md`. These screenshots must come from the actual Windows acceptance;
 headless maps are not substituted for human UI screenshots.
 
-S1/S2 have now been supplied and are embedded in README. A future capture of the
-fixed automatic loading should be labelled as a new run; the current S2 is retained
-as evidence of the original reopened-package view.
+S1/S2 are embedded in README. The successful new run has separate
+[Categorized evidence](figures/S2_style_recheck_v2.png) and
+[callback-log evidence](figures/S2_style_recheck_v2_log.jpg); original S2 remains
+evidence of the reopened-package view.
 
 ## Recheck the updated ZIP (2 minutes)
+
+**Completed: PASSED on 2026-10-13.** These steps document the acceptance procedure
+and can be reused by the independent tester; Raynald does not need to repeat it.
 
 1. Install the rebuilt `dist/km_flood_priority-1.0.0.zip`, then close and reopen QGIS
    to clear the previously imported plugin modules.

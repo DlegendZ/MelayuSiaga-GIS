@@ -348,3 +348,40 @@ no-push instruction; this update does not claim global Phase 5/6 acceptance.
    passes. Native desktop recheck of this ZIP is **pending**, using a new
    `data/processed/style_recheck_v2.gpkg` and the five callback logs. All commits
    stay local; **no push**, tag or release.
+
+## 2026-10-13 — Windows style recheck v2 accepted
+
+1. **PASS reported by Raynald** for QGIS 3.44.15 Windows, ZIP **60,930 bytes**
+   built from plugin code commit **b571f25**. SHA-256 remains
+   `b136fd06beb6f91f3eb8bf90dedcb77db1c4fe33b384bddee8de41a84e4fbfff`.
+   Procedure: install ZIP → restart → new project → five inputs.gpkg layers →
+   Run full pipeline → `data/processed/style_recheck_v2.gpkg`. Reported GUI
+   completion time: **1.16 s**. Operator: **Claude on Raynald's laptop under
+   Raynald's instructions**. This is delegated operation, not direct Raynald UI use.
+2. Actual screenshots inspected: five postProcessLayer entries and five restored
+   entries. rw_priority, safe_points and access_routes are categorizedSymbol;
+   roads and kelurahan_boundary are singleSymbol as designed. rw_priority's
+   Symbology is Categorized with HIGH/MEDIUM/VERIFY/NO_RECORD immediately after
+   execution, without reopening the GeoPackage. The callback lifetime/style issue
+   is closed for this plugin build; no further Raynald style recheck is pending.
+3. Read-only local audit of the produced GeoPackage confirms SQLite integrity,
+   **56 normalized events, zero validation issues and priority_table findings
+   identical to accepted Phase 4**. Comparison excludes generated fid/run_id
+   metadata; GeoPackage file hashes and run identity are not claimed identical.
+   Class counts remain **2 HIGH / 2 MEDIUM / 5 NO_RECORD**, with UNKNOWN access.
+4. Preserved the original local evidence and copied it byte for byte to docs/figures
+   for README links. Original screenshot SHA-256:
+   `S2_style_recheck_v2.png`:
+   `92fe6bb867882495b08282b12a1e1ab154ef1df79950a357d180da0f2040b27b`;
+   `S2_style_recheck_v2_log.jpg`:
+   `2cd9aa3dead01447cf83aedaa51875b590df898a5fbc4a03a8f7c9e6187d24f9`.
+   Original S1/S2 and failed-style evidence remain unchanged. Updated README,
+   USER_GUIDE, HUMAN_TASKS, brief and figure provenance to show the passed recheck.
+5. Local automated acceptance remains **116 unit tests / 99.18% core coverage**,
+   **14 integration tests per QGIS 3.44.15 and 4.2.3**, including two native Windows
+   GUI regressions. This documentation/evidence update does not change plugin code
+   or datasets. Next: independent clean-clone dry run by an available group member;
+   tester name will be recorded after the group chooses who runs it. Final two-page
+   brief layout/PDF and lecturer framing/language alignment remain pending. Remote
+   CI, tag and release remain deferred under **no push**; Phase 5/6 global acceptance
+   is not asserted. The optional demo remains pending.

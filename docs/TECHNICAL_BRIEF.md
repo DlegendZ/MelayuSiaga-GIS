@@ -85,8 +85,9 @@ QGIS 3.44.15, operated by Claude under his instructions, with three result table
 identical to Phase 4. Public plugin ZIP excludes
 sample_data by the group's licensing decision. The separate local data bundle is
 for a lecturer attachment only if authorized.
-The first automatic-style desktop recheck failed; the replacement callback repair
-passes the automated GUI tests and awaits another Windows desktop check.
+Automatic-style desktop recheck v2 passed on Windows QGIS 3.44.15 in **1.16 s**,
+operated by Claude on Raynald's laptop under his instructions. Five callbacks
+restored styles without reopening; priority_table findings match Phase 4.
 
 Repository: [MelayuSiaga-GIS](https://github.com/DlegendZ/MelayuSiaga-GIS). Public
 release URL: pending; no push/release is authorized.

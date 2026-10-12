@@ -10,6 +10,13 @@ S2 shows the styled package after reopening, before the GUI automatic style fix;
 it does not claim a manual rerun of that fix. Both screenshots are embedded in README.
 The demo remains pending. Preserve these originals; record new captures separately.
 
+Style recheck v2 PASSED on 2026-10-13, QGIS 3.44.15 Windows, reported by Raynald:
+**Claude operated Raynald's laptop under Raynald's instructions**. The original
+`dist/local-data/S2_style_recheck_v2.png` and `S2_style_recheck_v2_log.jpg` were copied
+unchanged here and embedded/linked in README. They show Categorized priority and
+five callback/restoration logs after a 1.16 s run, without reopening. They are
+acceptance evidence, not replacements for the original map/attribute-table S2.
+
 ## Capture on Windows (5 minutes after installation)
 
 1. Install `dist/km_flood_priority-1.0.0.zip` in QGIS. Open Processing Toolbox and

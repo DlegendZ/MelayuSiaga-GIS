@@ -50,6 +50,7 @@ only if the lecturer authorizes its attachment.
 |---|---|
 | S1: provider in Processing Toolbox plus pipeline dialog | Captured on QGIS 3.44.15 Windows |
 | S2: styled result map plus rw_priority attribute table | Captured after reopening the result GeoPackage |
+| Style recheck v2: automatic categories and five callbacks | PASSED on QGIS 3.44.15 Windows; 1.16 s; no reopening |
 | Short demo: install → pipeline → map | `docs/figures/demo.gif` or `demo.mp4`; recording pending |
 
 ![S1: Toolbox and pipeline dialog](docs/figures/S1_pipeline.png)
@@ -59,12 +60,17 @@ only if the lecturer authorizes its attachment.
 S1/S2 are genuine Windows screenshots, operated by Claude under Raynald's instructions.
 The reported pipeline time is **1.72 s**, with priority_table, access_by_rw and events
 identical to Phase 4. S2 demonstrates reopening the package before the GUI auto-load
-style fix. Raynald's subsequent desktop recheck failed: the pipeline completed in
-1.2 s, but automatic styles were missing. The replacement build retains callbacks
-at module level. Its regression tests use a fresh completion context and the GUI's
-background worker task, then the actual Processing result loader. Both require all
-five postProcessLayer log entries and categorized priority styles without reopening.
-The replacement build still needs a desktop recheck. See [the acceptance record](docs/PROGRESS.md).
+style fix. The first desktop recheck failed; the replacement build retains callbacks
+at module level. **Style recheck v2 passed on Windows QGIS 3.44.15 in 1.16 s**, operated
+by Claude on Raynald's laptop under his instructions: five callback entries, five
+restored styles and categorized priority without reopening. A read-only comparison
+confirmed that priority_table findings match Phase 4, excluding fid/run_id metadata.
+Its regression tests also use a fresh completion context and the GUI background task.
+See [the acceptance record](docs/PROGRESS.md).
+
+![Windows style recheck v2: Categorized priority](docs/figures/S2_style_recheck_v2.png)
+
+[Style recheck v2 callback log](docs/figures/S2_style_recheck_v2_log.jpg)
 
 <!-- Enable after the actual Windows recording is supplied:
 ![Windows installation and pipeline demo](docs/figures/demo.gif)
@@ -73,8 +79,7 @@ For MP4, use a link to docs/figures/demo.mp4 instead.
 
 F2 is a real map export; S1/S2 are native UI captures. Follow the
 [capture checklist](docs/figures/README.md). Automated acceptance covers QGIS
-3.44.15/Qt5 and 4.2.3/Qt6. Native Windows operation was reported by Raynald;
-the replacement for the failed automatic style repair still needs a desktop recheck.
+3.44.15/Qt5 and 4.2.3/Qt6. Native Windows pipeline/style acceptance is recorded above.
 
 ## What it computes
 
@@ -238,8 +243,7 @@ only. Three Nihil impact pairs remain NULL, and two source evacuation/affected-c
 inconsistencies remain in notes. PPID checking was delegated to Claude by Raynald;
 it is not described as direct human row checking.
 
-The earlier Windows GUI style recheck failed; the new module-level callback repair
-needs another desktop recheck. The demo, another
+Windows style recheck v2 passed. The demo, another
 member's clean-copy reproduction, lecturer alignment on framing/language, and the
 final two-page brief PDF remain pending. The three-member exception is confirmed.
 Remote CI/release checks
@@ -262,7 +266,7 @@ standard library. Unit acceptance: **116 tests, 99.18% core coverage**.
 |---|---|
 | `qgis/qgis:3.44.15-noble` / Qt5 | 14 tests pass, including ZIP/CLI, context transfer and GUI worker style loading |
 | `qgis/qgis:4.2.3-trixie` / Qt6 | 14 tests pass, including ZIP/CLI, context transfer and GUI worker style loading |
-| Native Windows 3.44.15 | Two automated GUI regressions pass; prior desktop recheck failed; replacement ZIP awaits recheck |
+| Native Windows 3.44.15 | Two automated GUI regressions pass; desktop style recheck v2 PASSED in 1.16 s |
 
 Run container integration with `python3 -m pytest tests/qgis -q` using the Docker
 mount above. The CI matrix uses both exact tags; remote CI is unrun. Local commits
