@@ -106,7 +106,8 @@ def compute_priority(
             )
             reason = f" ({worst.status_reason.replace('_', ' ')})" if worst else ""
             row.class_reason = (
-                f"{row.n_episodes} episodes ({year_text}), {depth}, "
+                f"{row.n_episodes} {'episode' if row.n_episodes == 1 else 'episodes'} "
+                f"({year_text}), {depth}, "
                 f"access {row.access_worst}{reason}"
             )
         rows.append(row)

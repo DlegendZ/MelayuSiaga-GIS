@@ -154,3 +154,62 @@
   PPID25 registry provenance update was completed after the reported reset time.
 - Commit is local only. Phase 4 now proceeds on the accepted 2025 working set.
 
+## 2026-10-13 — Phase 4 accepted by Raynald
+
+- Real input run: `scripts/run_pipeline_cli.py --docker --overwrite`, offline
+  QGIS 3.44.15; 4.048 seconds for the child pipeline. The measured container time
+  passes the 30-second target; native Windows timing is pending. Package has all
+  eleven application layers/tables, default styles, provenance and run metadata.
+- Counts: HIGH=2, MEDIUM=2, VERIFY=0, NO_RECORD=5 across nine RW. PPID 2025 only:
+  28 source rows → 56 normalized RW rows; zero schema errors/warnings/duplicates,
+  zero missing depth and zero unassigned RW. Three Nihil source impact pairs stay
+  NULL; two source evacuation/affected-count inconsistencies remain in notes.
+- Top five units, ordered by class then rank (NO_RECORD has no recorded evidence):
+
+| RW | Class / within-class rank | Records / episodes | Reason |
+|---|---|---|---|
+| 04 | HIGH / 1 | 25 / 16 | Maximum source depth 300 cm; access UNKNOWN |
+| 05 | HIGH / 2 | 25 / 16 | Maximum source depth 300 cm; access UNKNOWN |
+| 07 | MEDIUM / 1 | 3 / 1 | Depth 300 cm; one episode; access UNKNOWN |
+| 08 | MEDIUM / 2 | 3 / 1 | Depth 300 cm; one episode; access UNKNOWN |
+| 01 | NO_RECORD / 1 | 0 / 0 | No recorded event (≠ safe); field verification required |
+
+RW 04/05 share the same 25 source rows for Jl. Kebon Pala II, RT 12–13 in RW 04
+and RT 10–11 in RW 05. Their episode counts must not be summed. RW polygons are
+reporting units; whole-RW inundation is not established. RW 07/08 share three source
+rows. All nine units need field checking. All 252 RW/date access rows are UNKNOWN:
+440 candidate targets, zero verified targets, no verified closure table, zero routes.
+No baseline distance average is claimed under verified-only defaults.
+
+Sensitivity uses REC_MED=2 and episode gap=2 days throughout:
+
+| REC_HIGH | DEPTH_HIGH_CM | Changed RW | HIGH / MEDIUM / VERIFY / NO_RECORD |
+|---|---|---|---|
+| 2 | 30 | None | 2 / 2 / 0 / 5 |
+| 2 | 50 | None | 2 / 2 / 0 / 5 |
+| 2 | 80 | None | 2 / 2 / 0 / 5 |
+| 3 | 30 | None | 2 / 2 / 0 / 5 |
+| 3 | 50 | None | 2 / 2 / 0 / 5 |
+| 3 | 80 | None | 2 / 2 / 0 / 5 |
+| 4 | 30 | None | 2 / 2 / 0 / 5 |
+| 4 | 50 | None | 2 / 2 / 0 / 5 |
+| 4 | 80 | None | 2 / 2 / 0 / 5 |
+
+Robustness: exclude the five Genangan source rows (ten normalized rows); RW 04/05
+retain 20 records and **15 episodes each, HIGH**. No class changes. Thresholds were
+not tuned to produce the map. Reports are local `results.run.json` and
+`results.sanity.json`; the latter records the exact receipt:
+`result_review = "Accepted by Raynald 2026-10-13"`. New reports default to pending.
+
+Context only: the Satu Data export's publisher periods 2019–2020 list RW 04/05/07/08
+in many 2020 months, RW 01–03/06 within January–February 2020, and no explicit RW 09.
+Dates are unverified and excluded from classification. This shows the limitations
+of NO_RECORD and one episode in RW 07/08 in the 2025 working set; it does not prove
+absence of flooding. Context and source-row precision are carried into README,
+F2 caption, methodology and the brief draft.
+
+Raynald reviewed F2 and explicitly accepted the results and framing on 2026-10-13,
+authorizing Phase 5. The corrected real output now says `1 episode` for RW 07/08.
+The 116 unit tests still pass, with 99.18% core coverage. Data stays local and
+uncommitted; no push. Phase 5 licensing was decided separately: public ZIP without
+sample_data, with unresolved DKI/PPID redistribution permission.

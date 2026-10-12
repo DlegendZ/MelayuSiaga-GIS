@@ -78,6 +78,31 @@ does not claim direct human visual checking; three Nihil impact pairs remain NUL
 Two source evacuation/affected-count inconsistencies are recorded without changing
 JUMLAH TERDAMPAK values. Other source and candidate verifications are unaffected.
 
-The real-data run, figures and threshold sensitivity follow Phase 4. No hazard estimate
-is produced. Additional years can be added only after their source/date/RW evidence is resolved.
+## Accepted 2025 run and robustness
+
+Raynald accepted the Phase 4 results and framing on 2026-10-13. The 28 source rows
+produce 56 normalized RW rows: two HIGH (04/05), two MEDIUM (07/08), five NO_RECORD.
+Each of RW 04/05 has 16 episodes from the same 25 source rows for Jl. Kebon Pala II,
+RT 12–13 in RW 04 and RT 10–11 in RW 05. These episode counts must not be added
+across RW, and the RW polygons do not establish whole-RW inundation. RW 07/08 each
+have one episode from three shared source rows. All nine RW require field checks:
+252 RW/date access rows are UNKNOWN because no safe point is verified. No route or
+average baseline distance is available under the verified-only default.
+
+Nine sensitivity combinations (REC_HIGH 2/3/4 × DEPTH_HIGH_CM 30/50/80, keeping
+REC_MED=2 and the two-day episode gap) leave every class unchanged. Excluding five
+Genangan source rows removes ten normalized rows; RW 04/05 still have 15 episodes
+each and remain HIGH. These checks assess stability within the accepted working set.
+
+As context only, Satu Data publisher periods 2019–2020 list RW 04/05/07/08 in many
+2020 months, RW 01–03/06 within January–February 2020, and no explicit RW 09; event
+dates are unverified and excluded from classification, so NO_RECORD and one episode
+in RW 07/08 reflect limitations of the 2025 data. No absence of flooding is inferred.
+
+![Method flow](figures/F3_method_flow.png)
+
+The figures are headless exports of actual results; Windows UI screenshots remain a
+human acceptance task. Additional years require resolved source/date/RW evidence and
+new input acceptance. The report is `data/processed/results.sanity.json`, with
+`result_review = "Accepted by Raynald 2026-10-13"` for this accepted run.
 
