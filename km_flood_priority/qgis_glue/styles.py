@@ -2,10 +2,28 @@
 
 from pathlib import Path
 
-from qgis.core import QgsMapLayer
+from qgis.core import QgsMapLayer, QgsProcessingLayerPostProcessorInterface
 
 STYLE_DIR = Path(__file__).parents[1] / "styles"
 SPATIAL_STYLES = {"rw_priority", "access_routes", "safe_points", "roads", "kelurahan_boundary"}
+
+
+class PackageStylePostProcessor(QgsProcessingLayerPostProcessorInterface):
+    """Restore embedded styles after Processing's GUI result loader has finished."""
+
+    def __init__(self, final_package, name):
+        super().__init__()
+        self.uri = f"{final_package}|layername={name}"
+        self.name = name
+
+    def postProcessLayer(self, layer, context, feedback):
+        if layer.source() != self.uri:
+            layer.setDataSource(self.uri, self.name, "ogr")
+        message, success = layer.loadDefaultStyle()
+        if not success:
+            feedback.reportError(f"Could not load embedded {self.name} style: {message}")
+            return
+        layer.triggerRepaint()
 
 
 def apply_style(layer, name):

@@ -4,7 +4,13 @@ import sqlite3
 from pathlib import Path
 
 import pytest
-from qgis.core import QgsApplication, QgsProcessingContext, QgsProcessingFeedback, QgsVectorLayer
+from qgis.core import (
+    QgsApplication,
+    QgsProcessingContext,
+    QgsProcessingFeedback,
+    QgsProject,
+    QgsVectorLayer,
+)
 from qgis.PyQt.QtCore import QMetaType
 
 EXPECTED_LAYERS = {
@@ -106,6 +112,41 @@ def test_missing_evidence_produces_unknown(synthetic_inputs, tmp_path):
             row[0]
             for row in connection.execute("SELECT DISTINCT needs_field_check FROM rw_priority")
         } == {"Y"}
+
+
+def test_gui_completion_loads_final_package_with_default_priority_style(synthetic_inputs, tmp_path):
+    import gc
+
+    import processing
+    from processing.gui.Postprocessing import handleAlgorithmResults
+
+    project = QgsProject()
+    context = QgsProcessingContext()
+    context.setProject(project)
+    feedback = QgsProcessingFeedback()
+    parameters = {**synthetic_inputs, "OUTPUT_GPKG": str(tmp_path / "gui-final.gpkg")}
+    algorithm = QgsApplication.processingRegistry().algorithmById("kmflood:run_pipeline")
+    result = processing.run(algorithm, parameters, context=context, feedback=feedback)
+    # Exercise the GUI loader after execution, not a manual GeoPackage reopen.
+    gc.collect()
+    try:
+        assert handleAlgorithmResults(algorithm, context, feedback, parameters)
+        layers = {layer.name(): layer for layer in project.mapLayers().values()}
+        assert set(layers) == EXPECTED_LAYERS
+        priority = layers["rw_priority"]
+        assert priority.source() == f"{result['OUTPUT_GPKG']}|layername=rw_priority"
+        assert priority.renderer().type() == "categorizedSymbol"
+        assert {category.value() for category in priority.renderer().categories()} == {
+            "HIGH",
+            "MEDIUM",
+            "VERIFY",
+            "NO_RECORD",
+        }
+        assert priority.labelsEnabled()
+        for name in ("safe_points", "access_routes"):
+            assert layers[name].renderer().type() == "categorizedSymbol"
+    finally:
+        project.removeAllMapLayers()
 
 
 def test_pipeline_is_deterministic_except_run_identity(synthetic_inputs, tmp_path):
