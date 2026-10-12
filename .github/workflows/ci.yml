@@ -1,0 +1,19 @@
+name: Core quality
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m ruff check km_flood_priority scripts tests
+      - run: python -m ruff format --check km_flood_priority scripts tests
+      - run: python -m pytest tests/unit --cov=km_flood_priority/core --cov-report=term-missing --cov-fail-under=90
