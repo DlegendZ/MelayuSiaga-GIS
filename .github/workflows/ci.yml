@@ -1,4 +1,4 @@
-name: Core quality
+name: Plugin quality
 
 on:
   push:
@@ -17,3 +17,16 @@ jobs:
       - run: python -m ruff check km_flood_priority scripts tests
       - run: python -m ruff format --check km_flood_priority scripts tests
       - run: python -m pytest tests/unit --cov=km_flood_priority/core --cov-report=term-missing --cov-fail-under=90
+  qgis:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ['qgis/qgis:3.44.15-noble', 'qgis/qgis:4.2.3-trixie']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Integration and ZIP/CLI acceptance
+        run: >-
+          docker run --rm --network none -v "$PWD:/repo" -w /repo
+          -e QT_QPA_PLATFORM=offscreen --entrypoint python3 ${{ matrix.image }}
+          -m pytest tests/qgis -q --tb=short

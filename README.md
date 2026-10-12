@@ -21,8 +21,10 @@ has produced 28 source-located rows, accepted by Raynald after Claude's delegate
 independent check. The clean and merged event tables pass validation, with coverage
 **2025 only**. Four Satu Data CSVs were audited and excluded because they are monthly
 context or require source resolution. Phase 1 input acceptance is complete for this
-PPID-only working set. An installable plugin
-and real-data findings follow their acceptance gates.
+PPID-only working set. Phase 3 is accepted: all five Processing algorithms, menu lifecycle,
+embedded styles and the offline pipeline pass **12 integration tests on each of QGIS
+3.44.15 and 4.2.3**, including ZIP activation and qgis_process execution. Windows manual
+acceptance and real-data findings are the next gates.
 
 ## Development
 
@@ -40,7 +42,7 @@ To repeat the coverage and lint checks:
 ```
 
 The plugin core uses only the Python standard library and must import independently of QGIS.
-Target plugin platforms: QGIS 3.44 (Qt5) and QGIS 4.x (Qt6); plugin integration is pending.
+Tested plugin platforms: QGIS 3.44.15 (Qt5) and QGIS 4.2.3 (Qt6).
 Input preparation uses `qgis/qgis:3.44.15-noble`, verified against the
 [official Docker tags](https://hub.docker.com/r/qgis/qgis/tags).
 Local commits are made as work passes checks. No push or release is authorized.
@@ -105,8 +107,41 @@ before using these datasets. The CSV reader handles repeated leading UTF-8 BOMs
 without modifying raw files; the converter rejects affected-RW count fields as RW codes.
 
 Phase 1 is accepted only when the prepared inputs, valid event table, source registry,
-and actual recorded year coverage are available. The full pipeline CLI, plugin ZIP,
-screenshots, sensitivity analysis and technical brief are pending later phases.
+and actual recorded year coverage are available. These input gates are now met.
+Screenshots, real-data sensitivity and the technical brief follow their later gates.
+
+## Local plugin and pipeline
+
+Build the installable ZIP, with real sample data excluded by default:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/package_plugin.py
+```
+
+Install `dist/km_flood_priority-1.0.0.zip` through QGIS Plugins → Install from ZIP;
+follow [the Windows guide](docs/USER_GUIDE.md). The ZIP contains only the plugin root,
+code and assets; no tests, bytecode or synthetic/real datasets are bundled by default.
+
+Run the real local working set through qgis_process in an isolated offline container:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/run_pipeline_cli.py --docker
+```
+
+The wrapper uses a disposable QGIS profile, loads the repository plugin, and writes
+`data/processed/results.gpkg` plus `results.run.json`. Existing outputs are protected;
+use another filename or explicitly add `--overwrite`. In a QGIS/OSGeo4W shell, omit
+`--docker`. Optional candidate targets remain flagged; missing verified evidence yields UNKNOWN.
+
+| Integration runtime | Acceptance |
+|---|---|
+| `qgis/qgis:3.44.15-noble` | 12 tests pass, including ZIP/CLI |
+| `qgis/qgis:4.2.3-trixie` | 12 tests pass, including ZIP/CLI |
+| Native Windows desktop | Pending human acceptance |
+
+Repeat either container test with `python3 -m pytest tests/qgis -q` using the Docker
+mount pattern above. The CI matrix contains both exact tags; remote CI has not run
+because no push is authorized.
 
 ## License
 

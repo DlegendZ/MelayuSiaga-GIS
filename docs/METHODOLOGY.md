@@ -38,7 +38,7 @@ breaks exact ties deterministically. Scenario membership appears only as a compa
 
 ## Pedestrian network access
 
-Geometry and storage use EPSG:32748 (metres). The QGIS adapter will derive one
+Geometry and storage use EPSG:32748 (metres). The QGIS adapter derives one
 `pointOnSurface()` origin per RW. Every road vertex is rounded to 0.01 m; consecutive
 vertices create Euclidean edges. Shared vertices connect roads; crossings without a
 shared vertex do not connect. Parallel edges are retained. The undirected network
@@ -66,6 +66,18 @@ flowchart LR
     F --> G[Styled GeoPackage and source provenance]
 ```
 
-The core is implemented and unit-tested. QGIS adapters, the real-data run, figures and
-threshold sensitivity are still pending their phase gates. No hazard estimate is produced.
+The core and QGIS adapters are implemented and tested on QGIS 3.44.15/Qt5 and 4.2.3/Qt6.
+The plugin uses the four child Processing algorithms for its main pipeline; normalized
+events preserve verification/source-inconsistency notes. Every spatial result carries
+its default QML in the GeoPackage. Export requires explicit replacement consent for an
+existing output and completes a temporary package before replacement.
+
+For the current 2025 working set, Raynald explicitly accepted Claude's delegated
+independent second check and authorized the 28 source rows as Y/RW. This exception
+does not claim direct human visual checking; three Nihil impact pairs remain NULL.
+Two source evacuation/affected-count inconsistencies are recorded without changing
+JUMLAH TERDAMPAK values. Other source and candidate verifications are unaffected.
+
+The real-data run, figures and threshold sensitivity follow Phase 4. No hazard estimate
+is produced. Additional years can be added only after their source/date/RW evidence is resolved.
 

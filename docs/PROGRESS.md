@@ -121,3 +121,36 @@
 - Downloaded/accepted datasets remain local and gitignored pending redistribution
   confirmation. Documentation is committed locally; no push.
 
+## 2026-10-13 — Phase 3 accepted
+
+- Implemented the kmflood provider, all five algorithms, idempotent plugin/menu
+  lifecycle, Qt5/Qt6 field and IO adapters, five bundled QML styles, and offline
+  child-algorithm pipeline. Outputs include every required package layer and source
+  verification/inconsistency notes in the added events.notes field.
+- All spatial inputs are transformed to EPSG:32748. RW origin points use pointOnSurface;
+  safe points and closures marked verified require cited source fields. Missing evidence
+  remains UNKNOWN. Scenario membership never changes the priority class.
+- Export writes a temporary package, embeds default styles, closes the SQLite reader,
+  checkpoints WAL, then atomically replaces the destination only with explicit OVERWRITE.
+  Qt6 style-result enums are inspected by their integer value; Success is zero.
+- Integration acceptance: **12/12 pass in each runtime**. Covers five algorithm IDs,
+  all 11 package layers, typed dates/integers and NULL, default styles reopened from
+  the package, deterministic tables, protected existing output, CRS reprojection,
+  retained provenance, row/schema errors, unverified opt-in, citation rejection,
+  plugin menu reload, ZIP activation and qgis_process pipeline execution.
+- Runtime 1: qgis/qgis:3.44.15-noble, QGIS 3.44.15-Solothurn, Qt 5.15.13, Python 3.12.3;
+  digest sha256:497c1629c68ced7735dc25c25e33ada0040f5144099e92b78fae978bdf233466.
+- Runtime 2: qgis/qgis:4.2.3-trixie, QGIS 4.2.3-Belém do Pará, Qt 6.8.2, Python 3.13.5;
+  digest sha256:56c69c92e316aa679e5c30ebf7fcfd89fd1124ec728106ec0cced1c71a28d877.
+- The 116 core/acquisition unit cases still pass with 99.18% core coverage; Ruff
+  lint/format pass. Both exact QGIS tags are in the CI matrix. Remote CI is unrun
+  because no push is authorized. All integration containers ran with network disabled.
+- Added a reproducible ZIP builder and isolated-profile qgis_process wrapper, with
+  optional offline Docker execution. Local ZIP is 59,982 bytes, excludes bytecode,
+  tests and real sample datasets. Human redistribution confirmation remains pending.
+- Windows manual install, native UI screenshots and independent clean-clone acceptance
+  are still pending; automated interface tests are not described as human UI testing.
+- The earlier automatic approval-review usage failure expired; the previously blocked
+  PPID25 registry provenance update was completed after the reported reset time.
+- Commit is local only. Phase 4 now proceeds on the accepted 2025 working set.
+
