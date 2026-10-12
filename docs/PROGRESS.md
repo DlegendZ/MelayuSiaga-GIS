@@ -258,3 +258,46 @@ sample_data, with unresolved DKI/PPID redistribution permission.
   are deferred under the owner's commits-without-push instruction, not reported as
   passing. Lecturer alignment, independent clean-copy reproduction and final brief
   PDF also remain human gates. Local implementation/docs/artifacts are ready for them.
+## 2026-10-13 — Windows operation recorded; GUI style loading repaired
+
+1. Raynald reported the completed native Windows run on **QGIS 3.44.15**: pipeline
+   **1.72 s**; priority_table, access_by_rw and events identical to accepted Phase 4.
+   Operator: **Claude under Raynald's instructions on Raynald's laptop**. This is
+   user-reported delegated operation, not a claim that Raynald operated each UI step.
+   The reported native timing satisfies the 30-second target for that run.
+2. Supplied and visually inspected S1_pipeline.png and S2_results.png; embedded them
+   in README and S2 in the brief draft. Provenance: **screenshot asli Windows,
+   dioperasikan Claude atas instruksi Raynald**. S1 shows the provider and pipeline
+   dialog; S2 shows the reopened result package with category styles and attributes.
+   S2 predates the GUI automatic style fix and is not presented as a manual rerun
+   of that fix. Screenshot originals were preserved unchanged. SHA-256:
+   S1 `754b7dfea33f62590f6c87045508f3335263f8aeab02ef9b6db3875114f59539`;
+   S2 `6818b4e7ad76340c3c6be6e2249711bfdc50c168f5321685c4364d2102b2e26f`.
+3. Reproduced the reported bug with an integration test using QGIS's actual
+   `handleAlgorithmResults` GUI completion path: rw_priority was singleSymbol even
+   though reopening the same package loaded categorizedSymbol. Added a per-spatial-
+   layer postprocessor that binds the final OUTPUT_GPKG URI, calls loadDefaultStyle,
+   and repaints after the GUI loader finishes. Python callback wrappers are retained
+   by the processing context so garbage collection cannot discard their overrides.
+   This changes presentation only; classification/access/import rules are unchanged.
+4. Verification after the repair: **13 integration tests pass on each of QGIS
+   3.44.15/Qt5 and 4.2.3/Qt6**. The new test checks all eleven automatically loaded
+   layers, the final priority source URI, categorizedSymbol, all four category values,
+   labels and target/route categories without manual reopening. It also passes on
+   the installed **native Windows QGIS 3.44.15** in an additional offscreen test
+   (1 test, 6.39 s). Existing repository pytest dependencies were reused; nothing
+   was installed into QGIS. Unit tests: 116 pass, 99.18% core coverage. Ruff lint,
+   format, SQLite/NULL/provenance/ZIP/link audits and whitespace checks pass.
+5. Raynald confirmed a group-specific exception allowing **three members**; updated
+   the spec, README and human task list, removing the pending group-size question.
+   Rebuilt local plugin ZIP: **60,700 bytes**, SHA-256
+   `5635a24b8455e9b2ae3d44609d108f199ff4dd6462c5c2f225867b958a024f6f`;
+   still excludes the entire sample_data directory. The separate local data bundle
+   is unchanged, ignored and unreleased. All commits remain local; **no push**.
+
+Windows desktop recheck of the rebuilt ZIP is documented in USER_GUIDE (two minutes).
+The original Windows operation and screenshots are recorded as completed; the
+repaired build's desktop recheck is a separate pending deployment check. Demo,
+independent clean-copy reproduction, final two-page PDF and framing/language
+alignment remain pending. Remote CI/tag/release remain deferred under the owner's
+no-push instruction; this update does not claim global Phase 5/6 acceptance.

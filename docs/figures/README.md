@@ -4,6 +4,12 @@ F1/F2/F3 are generated from the real accepted working set by
 `scripts/render_figures.py`. F2's full claim limits and robustness are in
 [F2_caption.md](F2_caption.md). Map exports do not substitute for S1/S2 screenshots.
 
+S1_pipeline.png and S2_results.png are now supplied: genuine QGIS 3.44.15 Windows
+screenshots, operated by Claude under Raynald's instructions (reported 2026-10-13).
+S2 shows the styled package after reopening, before the GUI automatic style fix;
+it does not claim a manual rerun of that fix. Both screenshots are embedded in README.
+The demo remains pending. Preserve these originals; record new captures separately.
+
 ## Capture on Windows (5 minutes after installation)
 
 1. Install `dist/km_flood_priority-1.0.0.zip` in QGIS. Open Processing Toolbox and
@@ -18,8 +24,8 @@ F1/F2/F3 are generated from the real accepted working set by
    parameters and Run → resulting map and attributes. Keep captions explicit:
    recorded 2025 verification priority; UNKNOWN access; paired RW counts not summed.
 
-After genuine captures exist, enable their prepared Markdown embeds in README and
-remove the corresponding pending entries. For MP4, use a normal download/play link.
+After the recording exists, enable its prepared Markdown embed in README and
+remove the corresponding pending entry. For MP4, use a normal download/play link.
 Do not create substitute screenshots or label generated maps as UI evidence.
 
 The Windows acceptance checklist and current parameter table are in

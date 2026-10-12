@@ -16,12 +16,17 @@ people and note that the source evacuation totals exceed them.
 RW rows, zero schema errors, zero duplicates, all Y/RW, recorded coverage 2025.
 No further PPID row review is required for this accepted working set.
 
-## Lecturer alignment (2 minutes to send)
+## Group-size exception confirmed — 2026-10-13
+
+Raynald confirmed that this group has an exception permitting all three members.
+Group-size approval is resolved; do not ask for it again.
+
+## Lecturer framing/language alignment (2 minutes to send)
 
 Send this draft yourself; the agent will not contact the lecturer:
 
 > Pak Fabian, kelompok kami terdiri dari Raynald Arvan Lim, Alden Viriya Tanudjaja,
-> dan Moses Handoyo (3 orang). Apakah jumlah anggota ini diperbolehkan? Kami memilih
+> dan Moses Handoyo, sesuai pengecualian kelompok tiga orang kami. Kami memilih
 > Kota Jakarta Timur dengan fokus analisis RW Kelurahan Kampung Melayu, Jatinegara,
 > dan produk berupa plugin QGIS untuk prioritas verifikasi berdasarkan catatan banjir.
 > Apakah framing dan produk ini sesuai? Untuk technical brief maksimal 2 halaman,
@@ -59,11 +64,11 @@ to the lecturer only if the lecturer permits it. Never commit or release that bu
 
 - Safe-point/closure verification can improve future runs; the accepted run proceeds
   with UNKNOWN and makes no route safety claim.
-- Docker Desktop was started by the user. QGIS 3.44.15-noble was downloaded for development.
-  For final Windows manual acceptance, install QGIS 3.44 LTR from [QGIS Downloads](https://qgis.org/download/).
-- Capture actual S1/S2 and the 30–60 second demo using [this checklist](figures/README.md).
-  Share the installation path/version when installed; the agent can then guide the
-  native run and incorporate the real screenshots into README.
+- Windows QGIS 3.44.15 is installed; its operation and S1/S2 were reported by Raynald,
+  operated by Claude under his instructions. The GUI style repair passed an automated
+  test on that native installation. Recheck the updated ZIP using
+  [the two-minute guide](USER_GUIDE.md#recheck-the-updated-zip-2-minutes).
+- Record the optional 30–60 second demo using [this checklist](figures/README.md).
 - Phase 6: another member performs a clean-copy reproduction; the group finalizes
   the [brief draft](TECHNICAL_BRIEF.md) to at most two A4 pages and exports the PDF.
   Public release/remote CI awaits a future change to the owner's no-push instruction.

@@ -101,8 +101,13 @@ in RW 07/08 reflect limitations of the 2025 data. No absence of flooding is infe
 
 ![Method flow](figures/F3_method_flow.png)
 
-The figures are headless exports of actual results; Windows UI screenshots remain a
-human acceptance task. Additional years require resolved source/date/RW evidence and
+F1/F2/F3 are headless exports of actual results. S1/S2 are genuine Windows UI
+screenshots, operated by Claude under Raynald's instructions, reported on 2026-10-13.
+The Windows pipeline took 1.72 s with three result tables identical to Phase 4,
+according to Raynald. S2 shows the reopened package before the GUI style repair.
+The repair restores embedded styles from the final package after Processing's GUI
+loader has added the layers; it changes presentation only. Additional years require
+resolved source/date/RW evidence and
 new input acceptance. The report is `data/processed/results.sanity.json`, with
 `result_review = "Accepted by Raynald 2026-10-13"` for this accepted run.
 

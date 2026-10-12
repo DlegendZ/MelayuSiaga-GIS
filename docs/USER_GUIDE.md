@@ -1,8 +1,10 @@
 # KM Flood Priority user guide
 
 The local ZIP is installable. Automated acceptance passed on QGIS 3.44.15 and 4.2.3,
-including ZIP activation through qgis_process. Windows desktop acceptance and
-screenshots must still be performed by a group member.
+including ZIP activation and GUI result loading. Raynald reported a Windows run
+on QGIS 3.44.15: 1.72 s, with priority_table, access_by_rw and events identical to
+Phase 4. The operator was Claude under Raynald's instructions. S1/S2 are genuine
+Windows screenshots. S2 shows the package reopened before the automatic style fix.
 
 ## Install and run on Windows
 
@@ -19,7 +21,9 @@ screenshots must still be performed by a group member.
    Synthetic fixtures are not demonstration sample data.
 4. Open KM Flood Priority → Run full pipeline…; select the inputs below, leave the
    thresholds at their documented defaults and choose a new output filename. Run.
-5. Open the result GeoPackage in a new project and select all layers. Check styles,
+5. Check the automatically loaded result: rw_priority must already show categories
+   and labels without reopening the file. Open the GeoPackage in a new project and
+   select all layers to check the saved styles too. Check
    source notes, priority reasons and UNKNOWN access. Disable and re-enable the plugin;
    menu entries must be removed and restored once, with no console error.
 
@@ -62,15 +66,30 @@ its provenance is retained in events.notes.
 |---|---|
 | ZIP enables and pipeline runs through qgis_process on 3.44.15 and 4.2.3 | Automated pass |
 | All five algorithm IDs, field types, styles, deterministic tables, CRS and UNKNOWN rules | Automated pass |
+| GUI loader uses final package styles without reopening | Automated regression pass on Qt5, Qt6 and native Windows 3.44.15 |
 | Menu lifecycle across two reloads | Automated interface test pass |
-| Windows ZIP install and native menu/toolbox interaction | Human pending |
-| Fresh-project styles, screenshots S1/S2 and clean-clone run by another member | Human pending |
+| Windows operation and reopened-package styles; S1/S2 | Reported by Raynald, operated by Claude under his instructions |
+| Desktop recheck with the repaired ZIP; independent clean-copy run | Pending |
 
 Capture S1: Processing Toolbox showing the provider and the pipeline dialog.
 Capture S2: styled result map with the rw_priority attribute table open.
 Record QGIS version, tester, date and any correction in
 `docs/PROGRESS.md`. These screenshots must come from the actual Windows acceptance;
 headless maps are not substituted for human UI screenshots.
+
+S1/S2 have now been supplied and are embedded in README. A future capture of the
+fixed automatic loading should be labelled as a new run; the current S2 is retained
+as evidence of the original reopened-package view.
+
+## Recheck the updated ZIP (2 minutes)
+
+1. Install the rebuilt `dist/km_flood_priority-1.0.0.zip`, then close and reopen QGIS
+   to clear the previously imported plugin modules.
+2. Run the same local inputs to a **new** GeoPackage. Inspect rw_priority immediately:
+   HIGH/MEDIUM/VERIFY/NO_RECORD categories and RW/episode labels must appear without
+   manually reopening the file. Layer Properties → Symbology should show Categorized.
+3. Record the result in PROGRESS.md. The original Windows operation already passed;
+   this checks deployment of the repaired build. No data transcription is required.
 
 Save the actual screenshots as `docs/figures/S1_pipeline.png` and
 `docs/figures/S2_results.png`. A 30–60 second installation → pipeline → map demo

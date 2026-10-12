@@ -34,6 +34,10 @@
 | R4 | **Deployed source code** in the group repository, with documentation sufficient to reproduce | §9, §10 |
 | R5 | **GIS application**: choose one. Chosen: **QGIS Plugin** (max 100%). Must provide meaningful GIS functionality for the problem and be successfully deployed and operated within QGIS | §4, §5, §8 |
 
+**Group exception — confirmed by Raynald 2026-10-13:** this group is permitted three
+members: Raynald Arvan Lim, Alden Viriya Tanudjaja and Moses Handoyo. R1 above retains
+the general guideline; the group-size confirmation task is resolved for this project.
+
 **Why a QGIS plugin and not a web app:** a static web app caps at 85%. Reaching 100% with a web app needs a framework, backend, and database. A functional plugin reaches 100% with a smaller, more testable surface. The research document already specifies three plugin processes, and this spec implements exactly those.
 
 ### 1.2 Source research (summary of `Riset GIS_ Banjir Kampung Melayu.pdf`)

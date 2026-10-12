@@ -23,8 +23,9 @@ episodes each and HIGH**; nine threshold combinations change no class. See the
 BINUS GIS Final Project. Authors: Raynald Arvan Lim (`raynald.lim@binus.ac.id`),
 Alden Viriya Tanudjaja (`alden.tanudjaja@binus.ac.id`), Moses Handoyo
 (`moses.handoyo@binus.ac.id`). The study area comprises nine official indicative RW
-units, with a measured boundary area of 47.99 ha. Lecturer confirmation of the
-three-person group, study framing and brief language remains pending.
+units, with a measured boundary area of 47.99 ha. Raynald confirmed a group-specific
+exception permitting three members on 2026-10-13. Lecturer alignment on study framing
+and brief language remains pending.
 
 ## Quick start for graders
 
@@ -45,22 +46,32 @@ only if the lecturer authorizes its attachment.
 5. Run and open the result in a fresh project. Inspect `rw_priority`, its reasons,
    `validation_issues`, `access_by_rw`, and `run_info`; embedded styles should load.
 
-| Native Windows evidence | Slot / current status |
+| Native Windows evidence | Status |
 |---|---|
-| S1: provider in Processing Toolbox plus pipeline dialog | `docs/figures/S1_pipeline.png`; capture pending |
-| S2: styled result map plus rw_priority attribute table | `docs/figures/S2_results.png`; capture pending |
+| S1: provider in Processing Toolbox plus pipeline dialog | Captured on QGIS 3.44.15 Windows |
+| S2: styled result map plus rw_priority attribute table | Captured after reopening the result GeoPackage |
 | Short demo: install → pipeline → map | `docs/figures/demo.gif` or `demo.mp4`; recording pending |
 
-<!-- Replace the pending rows with these embeds after actual Windows acceptance:
 ![S1: Toolbox and pipeline dialog](docs/figures/S1_pipeline.png)
+
 ![S2: Result map and priority attributes](docs/figures/S2_results.png)
+
+S1/S2 are genuine Windows screenshots, operated by Claude under Raynald's instructions.
+The reported pipeline time is **1.72 s**, with priority_table, access_by_rw and events
+identical to Phase 4. S2 demonstrates reopening the package before the GUI auto-load
+style fix; it is not evidence of a manual rerun of that fix. A new integration test
+exercises the actual Processing GUI result loader and checks categorized priority
+styles without reopening the package. See [the acceptance record](docs/PROGRESS.md).
+
+<!-- Enable after the actual Windows recording is supplied:
 ![Windows installation and pipeline demo](docs/figures/demo.gif)
 For MP4, use a link to docs/figures/demo.mp4 instead.
 -->
 
-F2 is a real map export; S1/S2 must be actual Windows screenshots. Follow the
+F2 is a real map export; S1/S2 are native UI captures. Follow the
 [capture checklist](docs/figures/README.md). Automated acceptance covers QGIS
-3.44.15/Qt5 and 4.2.3/Qt6; native Windows acceptance is still pending.
+3.44.15/Qt5 and 4.2.3/Qt6. Native Windows operation was reported by Raynald;
+the repaired automatic style loading still needs a desktop recheck of the updated ZIP.
 
 ## What it computes
 
@@ -91,8 +102,9 @@ Install QGIS 3.44 LTR from [QGIS Downloads](https://qgis.org/download/), then op
 than the development `.venv`. Acquisition and input preparation use only the Python
 standard library and QGIS's installed bindings; **no pip install is required**.
 The [official PyQGIS cookbook](https://docs.qgis.org/3.44/en/docs/pyqgis_developer_cookbook/intro.html#running-custom-applications)
-describes why standalone scripts need the QGIS environment. Native Windows execution
-still needs the group's acceptance check; the same scripts have run in QGIS containers.
+describes why standalone scripts need the QGIS environment. Fresh Windows acquisition
+and preparation still need the independent reproduction check; the pipeline itself
+has run on Windows, and the preparation scripts have run in QGIS containers.
 
 1. Enter your repository directory and locate the installed launcher. These are
    **cmd / OSGeo4W Shell commands**, not PowerShell. Replace the repository path.
@@ -223,8 +235,10 @@ only. Three Nihil impact pairs remain NULL, and two source evacuation/affected-c
 inconsistencies remain in notes. PPID checking was delegated to Claude by Raynald;
 it is not described as direct human row checking.
 
-Native Windows acceptance, S1/S2, another member's clean-copy reproduction, lecturer
-alignment, and the final two-page brief PDF remain pending. Remote CI/release checks
+The repaired GUI auto-load style needs a Windows desktop recheck. The demo, another
+member's clean-copy reproduction, lecturer alignment on framing/language, and the
+final two-page brief PDF remain pending. The three-member exception is confirmed.
+Remote CI/release checks
 cannot be claimed while the owner's no-push instruction remains in effect.
 
 ## Development
@@ -242,9 +256,9 @@ standard library. Unit acceptance: **116 tests, 99.18% core coverage**.
 
 | Integration runtime | Acceptance |
 |---|---|
-| `qgis/qgis:3.44.15-noble` / Qt5 | 12 tests pass, including ZIP/CLI |
-| `qgis/qgis:4.2.3-trixie` / Qt6 | 12 tests pass, including ZIP/CLI |
-| Native Windows desktop | Human pending |
+| `qgis/qgis:3.44.15-noble` / Qt5 | 13 tests pass, including ZIP/CLI and GUI style loading |
+| `qgis/qgis:4.2.3-trixie` / Qt6 | 13 tests pass, including ZIP/CLI and GUI style loading |
+| Native Windows desktop 3.44.15 | Operation reported by Raynald; 1.72 s; updated style fix needs desktop recheck |
 
 Run container integration with `python3 -m pytest tests/qgis -q` using the Docker
 mount above. The CI matrix uses both exact tags; remote CI is unrun. Local commits

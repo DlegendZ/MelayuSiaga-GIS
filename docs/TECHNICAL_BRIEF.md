@@ -5,7 +5,8 @@
 BINUS GIS Final Project · Phase 4 accepted by Raynald, 2026-10-13
 
 Editorial note: finalize in Word/Google Docs and export **at most two A4 pages**.
-Default language: English. Lecturer alignment and Windows screenshots remain pending.
+Default language: English. Lecturer framing/language alignment remains pending;
+the three-member group exception is confirmed and Windows screenshots are available.
 Use F1/F3 as small insets and F2 as the main map; keep this note outside the final PDF.
 
 ## Problem and study area
@@ -78,12 +79,19 @@ missing reporting. Obtain source-backed safe points, capacity and dated closures
 before using route outputs for planning. Require RW/RT on future reports.
 
 The plugin offers five Processing algorithms and an offline pipeline. Local automated
-checks passed **116 unit tests (99.18% core coverage)** and **12 integration tests
-in each of QGIS 3.44.15 and 4.2.3**. The accepted real run took **4.048 seconds** in
-the QGIS container; native Windows timing is untested. Public plugin ZIP excludes
+checks passed **116 unit tests (99.18% core coverage)** and **13 integration tests
+in each of QGIS 3.44.15 and 4.2.3**. Raynald reported **1.72 seconds** on Windows
+QGIS 3.44.15, operated by Claude under his instructions, with three result tables
+identical to Phase 4. Public plugin ZIP excludes
 sample_data by the group's licensing decision. The separate local data bundle is
 for a lecturer attachment only if authorized.
 
 Repository: [MelayuSiaga-GIS](https://github.com/DlegendZ/MelayuSiaga-GIS). Public
-release URL: pending; no push/release is authorized. Product screenshot: S2 pending
-actual Windows acceptance. Insert S2 and a release URL only when those exist.
+release URL: pending; no push/release is authorized.
+
+![S2: native Windows product map and attributes](figures/S2_results.png)
+
+S2 is a genuine Windows screenshot, operated by Claude under Raynald's instructions,
+after reopening the result GeoPackage before the automatic GUI style loading fix.
+It demonstrates the package style, not a manual rerun of that fix. Include a release
+URL only when it exists; finalize the brief layout to at most two A4 pages.
