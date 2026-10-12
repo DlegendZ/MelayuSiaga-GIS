@@ -51,7 +51,9 @@ Windows acquisition/preparation. No push is required for either path.
    Group members may reuse the already accepted 28-row event CSV from the separate
    local data ZIP: copy its events_all.csv to data/clean/events_ppid_2025.csv and
    keep its existing notes/NULLs. Use its sources.csv as the starting registry,
-   then record the fresh boundary/OSM snapshot IDs and metadata required by README.
+   then update the existing admin registry rows for the fresh snapshots and register
+   the exact new OSM source ID/metadata required by README. Keep source IDs unique
+   and retain PPID25 unchanged.
    This reuses accepted transcription; no new PPID row review is required for the
    unchanged working set. Keep the ZIP separate while building new inputs.
 

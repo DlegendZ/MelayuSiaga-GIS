@@ -404,3 +404,12 @@ no-push instruction; this update does not claim global Phase 5/6 acceptance.
   verifies, clones and packages successfully is handoff preparation only. Final
   two-page brief PDF, lecturer alignment and remote CI/tag/release remain pending;
   this preparation does not assert global Phase 5/6 acceptance. **No push**.
+- **Agent handoff preflight PASS:** Git bundle verifies with complete history; a
+  new local clone has clean status and no prepared inputs/original PDF/event CSV;
+  QGIS 3.44.15's bundled Python builds the plugin with no additional packages.
+  Both the accepted and clean-clone ZIP pass CRC/root/data-exclusion checks, and
+  all plugin files match after normalizing checkout CRLF/LF. The accepted Windows
+  ZIP is unchanged at 60,930 bytes; the separately built preflight ZIP differs in
+  bytes because of checkout newline conversion. This checks source/package handoff,
+  not fresh acquisition, an independent student run or a public release. Local
+  bundle commit/hash details are in dist/MelayuSiaga-GIS-reproduce.info.txt.
