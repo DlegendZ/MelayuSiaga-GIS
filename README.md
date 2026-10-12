@@ -103,6 +103,11 @@ zero routes**; no average baseline distance is claimed. All nine RW need field c
 
 ## Reproduce from scratch
 
+For the group's next independent check, use
+[the clean-clone guide and result form](docs/REPRODUCIBILITY_CHECK.md). A local Git
+bundle provides the current branch without pushing; fresh preparation and an
+accepted-snapshot pipeline check are recorded separately.
+
 ### Windows with QGIS Python
 
 Install QGIS 3.44 LTR from [QGIS Downloads](https://qgis.org/download/), then open its

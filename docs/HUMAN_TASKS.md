@@ -69,7 +69,9 @@ to the lecturer only if the lecturer permits it. Never commit or release that bu
   with five callback/restoration logs and Categorized priority without reopening.
   No further style recheck is needed for this unchanged plugin build.
 - Record the optional 30–60 second demo using [this checklist](figures/README.md).
-- Phase 6: another member performs a clean-copy reproduction; the group finalizes
+- Phase 6: another member performs a clean-copy reproduction using
+  [the clean-clone guide and report](REPRODUCIBILITY_CHECK.md); tester selection
+  can wait until Alden or Moses is available. Then the group finalizes
   the [brief draft](TECHNICAL_BRIEF.md) to at most two A4 pages and exports the PDF.
   Public release/remote CI awaits a future change to the owner's no-push instruction.
 

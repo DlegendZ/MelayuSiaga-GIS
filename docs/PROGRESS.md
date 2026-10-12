@@ -385,3 +385,22 @@ no-push instruction; this update does not claim global Phase 5/6 acceptance.
    brief layout/PDF and lecturer framing/language alignment remain pending. Remote
    CI, tag and release remain deferred under **no push**; Phase 5/6 global acceptance
    is not asserted. The optional demo remains pending.
+
+## 2026-10-13 — Independent reproduction handoff prepared without push
+
+- Prepared docs/REPRODUCIBILITY_CHECK.md with five Windows steps, the known input
+  and style checks, and a tester/operator/result form. Raynald will use whichever
+  member is available; no name is imposed before the run. Reusing the accepted
+  unchanged PPID transcription does not require repeating its accepted row review.
+- The handoff uses a local Git bundle of codex/flood-priority-foundation so the
+  second student can make a genuinely clean clone while the no-push rule remains
+  in force. Bundle and identifying commit/hash info are local dist artifacts,
+  excluded from commits and public release. They contain tracked code/docs/evidence
+  and Git history, not original datasets or the local-only processed-data ZIP.
+- The guide distinguishes the complete README acquisition/preparation path from
+  a snapshot-only pipeline test; the latter does not close the fresh-preparation
+  gate. Fresh OSM counts are allowed to vary and must retain source metadata.
+- Independent student execution is still pending. An agent check that the bundle
+  verifies, clones and packages successfully is handoff preparation only. Final
+  two-page brief PDF, lecturer alignment and remote CI/tag/release remain pending;
+  this preparation does not assert global Phase 5/6 acceptance. **No push**.
