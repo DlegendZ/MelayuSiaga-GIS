@@ -114,27 +114,63 @@ def test_missing_evidence_produces_unknown(synthetic_inputs, tmp_path):
         } == {"Y"}
 
 
-def test_gui_completion_loads_final_package_with_default_priority_style(synthetic_inputs, tmp_path):
+@pytest.mark.parametrize("execution_mode", ["context_transfer", "gui_worker"])
+def test_gui_completion_loads_final_package_with_default_priority_style(
+    synthetic_inputs, tmp_path, execution_mode
+):
     import gc
 
     import processing
     from processing.gui.Postprocessing import handleAlgorithmResults
+    from qgis.core import QgsProcessingAlgRunnerTask
+    from qgis.PyQt.QtCore import QEventLoop, QTimer
 
     project = QgsProject()
-    context = QgsProcessingContext()
-    context.setProject(project)
     feedback = QgsProcessingFeedback()
     parameters = {**synthetic_inputs, "OUTPUT_GPKG": str(tmp_path / "gui-final.gpkg")}
     algorithm = QgsApplication.processingRegistry().algorithmById("kmflood:run_pipeline")
-    result = processing.run(algorithm, parameters, context=context, feedback=feedback)
-    # Exercise the GUI loader after execution, not a manual GeoPackage reopen.
+
+    def execute_with_temporary_context():
+        execution_context = QgsProcessingContext()
+        execution_context.setProject(project)
+        if execution_mode == "gui_worker":
+            # AlgorithmDialog uses this background task, whose processAlgorithm
+            # receives a temporary SIP context wrapper on the worker thread.
+            loop = QEventLoop()
+            timer = QTimer()
+            timer.setSingleShot(True)
+            timer.timeout.connect(loop.quit)
+            outcome = {}
+
+            def finished(successful, results):
+                outcome["success"] = successful
+                loop.quit()
+
+            task = QgsProcessingAlgRunnerTask(algorithm, parameters, execution_context, feedback)
+            task.executed.connect(finished)
+            QgsApplication.taskManager().addTask(task)
+            timer.start(20000)
+            loop.exec()
+            timer.stop()
+            assert outcome.get("success"), feedback.textLog()
+        else:
+            processing.run(algorithm, parameters, context=execution_context, feedback=feedback)
+        completion_context = QgsProcessingContext()
+        completion_context.setProject(project)
+        completion_context.takeResultsFrom(execution_context)
+        # Keep only the C++ completion results, not the execution wrapper or its
+        # arbitrary Python attributes. Real GUI worker contexts are temporary.
+        return completion_context
+
+    context = execute_with_temporary_context()
+    # No test reference to callbacks or the original context may keep them alive.
     gc.collect()
     try:
         assert handleAlgorithmResults(algorithm, context, feedback, parameters)
         layers = {layer.name(): layer for layer in project.mapLayers().values()}
         assert set(layers) == EXPECTED_LAYERS
         priority = layers["rw_priority"]
-        assert priority.source() == f"{result['OUTPUT_GPKG']}|layername=rw_priority"
+        assert priority.source() == f"{parameters['OUTPUT_GPKG']}|layername=rw_priority"
         assert priority.renderer().type() == "categorizedSymbol"
         assert {category.value() for category in priority.renderer().categories()} == {
             "HIGH",
@@ -145,6 +181,19 @@ def test_gui_completion_loads_final_package_with_default_priority_style(syntheti
         assert priority.labelsEnabled()
         for name in ("safe_points", "access_routes"):
             assert layers[name].renderer().type() == "categorizedSymbol"
+        # These two defaults intentionally use a single symbol. Check their
+        # appearance so a random Processing symbol cannot pass as a valid style.
+        roads_symbol = layers["roads"].renderer().symbol()
+        assert roads_symbol.color().name() == "#bdbdbd"
+        assert roads_symbol.width() == pytest.approx(0.15)
+        boundary_symbol = layers["kelurahan_boundary"].renderer().symbol().symbolLayer(0)
+        assert boundary_symbol.strokeColor().name() == "#252525"
+        assert boundary_symbol.strokeWidth() == pytest.approx(0.8)
+        log = feedback.textLog()
+        for name in ("rw_priority", "access_routes", "safe_points", "roads", "kelurahan_boundary"):
+            assert f"postProcessLayer({name})" in log
+            assert f"restored {name} style" in log
+        assert "Could not load embedded" not in log
     finally:
         project.removeAllMapLayers()
 

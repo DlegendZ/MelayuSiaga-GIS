@@ -65,8 +65,10 @@ to the lecturer only if the lecturer permits it. Never commit or release that bu
 - Safe-point/closure verification can improve future runs; the accepted run proceeds
   with UNKNOWN and makes no route safety claim.
 - Windows QGIS 3.44.15 is installed; its operation and S1/S2 were reported by Raynald,
-  operated by Claude under his instructions. The GUI style repair passed an automated
-  test on that native installation. Recheck the updated ZIP using
+  operated by Claude under his instructions. The first repaired ZIP failed the
+  subsequent desktop style recheck, despite a successful 1.2 s data pipeline.
+  The replacement uses module-level callback references and passes fresh-context
+  and background-worker GUI tests on the native installation. Recheck this ZIP using
   [the two-minute guide](USER_GUIDE.md#recheck-the-updated-zip-2-minutes).
 - Record the optional 30–60 second demo using [this checklist](figures/README.md).
 - Phase 6: another member performs a clean-copy reproduction; the group finalizes

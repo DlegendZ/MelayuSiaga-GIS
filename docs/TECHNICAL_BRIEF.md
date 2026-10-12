@@ -79,12 +79,14 @@ missing reporting. Obtain source-backed safe points, capacity and dated closures
 before using route outputs for planning. Require RW/RT on future reports.
 
 The plugin offers five Processing algorithms and an offline pipeline. Local automated
-checks passed **116 unit tests (99.18% core coverage)** and **13 integration tests
+checks passed **116 unit tests (99.18% core coverage)** and **14 integration tests
 in each of QGIS 3.44.15 and 4.2.3**. Raynald reported **1.72 seconds** on Windows
 QGIS 3.44.15, operated by Claude under his instructions, with three result tables
 identical to Phase 4. Public plugin ZIP excludes
 sample_data by the group's licensing decision. The separate local data bundle is
 for a lecturer attachment only if authorized.
+The first automatic-style desktop recheck failed; the replacement callback repair
+passes the automated GUI tests and awaits another Windows desktop check.
 
 Repository: [MelayuSiaga-GIS](https://github.com/DlegendZ/MelayuSiaga-GIS). Public
 release URL: pending; no push/release is authorized.

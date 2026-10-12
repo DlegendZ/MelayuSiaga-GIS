@@ -59,9 +59,12 @@ only if the lecturer authorizes its attachment.
 S1/S2 are genuine Windows screenshots, operated by Claude under Raynald's instructions.
 The reported pipeline time is **1.72 s**, with priority_table, access_by_rw and events
 identical to Phase 4. S2 demonstrates reopening the package before the GUI auto-load
-style fix; it is not evidence of a manual rerun of that fix. A new integration test
-exercises the actual Processing GUI result loader and checks categorized priority
-styles without reopening the package. See [the acceptance record](docs/PROGRESS.md).
+style fix. Raynald's subsequent desktop recheck failed: the pipeline completed in
+1.2 s, but automatic styles were missing. The replacement build retains callbacks
+at module level. Its regression tests use a fresh completion context and the GUI's
+background worker task, then the actual Processing result loader. Both require all
+five postProcessLayer log entries and categorized priority styles without reopening.
+The replacement build still needs a desktop recheck. See [the acceptance record](docs/PROGRESS.md).
 
 <!-- Enable after the actual Windows recording is supplied:
 ![Windows installation and pipeline demo](docs/figures/demo.gif)
@@ -71,7 +74,7 @@ For MP4, use a link to docs/figures/demo.mp4 instead.
 F2 is a real map export; S1/S2 are native UI captures. Follow the
 [capture checklist](docs/figures/README.md). Automated acceptance covers QGIS
 3.44.15/Qt5 and 4.2.3/Qt6. Native Windows operation was reported by Raynald;
-the repaired automatic style loading still needs a desktop recheck of the updated ZIP.
+the replacement for the failed automatic style repair still needs a desktop recheck.
 
 ## What it computes
 
@@ -235,7 +238,8 @@ only. Three Nihil impact pairs remain NULL, and two source evacuation/affected-c
 inconsistencies remain in notes. PPID checking was delegated to Claude by Raynald;
 it is not described as direct human row checking.
 
-The repaired GUI auto-load style needs a Windows desktop recheck. The demo, another
+The earlier Windows GUI style recheck failed; the new module-level callback repair
+needs another desktop recheck. The demo, another
 member's clean-copy reproduction, lecturer alignment on framing/language, and the
 final two-page brief PDF remain pending. The three-member exception is confirmed.
 Remote CI/release checks
@@ -256,9 +260,9 @@ standard library. Unit acceptance: **116 tests, 99.18% core coverage**.
 
 | Integration runtime | Acceptance |
 |---|---|
-| `qgis/qgis:3.44.15-noble` / Qt5 | 13 tests pass, including ZIP/CLI and GUI style loading |
-| `qgis/qgis:4.2.3-trixie` / Qt6 | 13 tests pass, including ZIP/CLI and GUI style loading |
-| Native Windows desktop 3.44.15 | Operation reported by Raynald; 1.72 s; updated style fix needs desktop recheck |
+| `qgis/qgis:3.44.15-noble` / Qt5 | 14 tests pass, including ZIP/CLI, context transfer and GUI worker style loading |
+| `qgis/qgis:4.2.3-trixie` / Qt6 | 14 tests pass, including ZIP/CLI, context transfer and GUI worker style loading |
+| Native Windows 3.44.15 | Two automated GUI regressions pass; prior desktop recheck failed; replacement ZIP awaits recheck |
 
 Run container integration with `python3 -m pytest tests/qgis -q` using the Docker
 mount above. The CI matrix uses both exact tags; remote CI is unrun. Local commits

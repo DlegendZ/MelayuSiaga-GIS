@@ -146,10 +146,6 @@ class RunPipelineAlgorithm(KMFloodAlgorithm):
             },
         )
         if context.project() is not None:
-            # C++ ownership does not keep the Python virtual-method wrapper alive.
-            # Retain callbacks for the same lifetime as the GUI/model processing context.
-            if not hasattr(context, "_kmflood_style_postprocessors"):
-                context._kmflood_style_postprocessors = []
             for name in (
                 "rw_priority",
                 "access_routes",
@@ -165,8 +161,7 @@ class RunPipelineAlgorithm(KMFloodAlgorithm):
             ):
                 details = QgsProcessingContext.LayerDetails(name, context.project(), "OUTPUT_GPKG")
                 if name in SPATIAL_STYLES:
-                    processor = PackageStylePostProcessor(exported["OUTPUT_GPKG"], name)
-                    context._kmflood_style_postprocessors.append(processor)
+                    processor = PackageStylePostProcessor.create(exported["OUTPUT_GPKG"], name)
                     details.setPostProcessor(processor)
                 context.addLayerToLoadOnCompletion(
                     f"{exported['OUTPUT_GPKG']}|layername={name}", details

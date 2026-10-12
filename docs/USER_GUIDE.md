@@ -5,6 +5,10 @@ including ZIP activation and GUI result loading. Raynald reported a Windows run
 on QGIS 3.44.15: 1.72 s, with priority_table, access_by_rw and events identical to
 Phase 4. The operator was Claude under Raynald's instructions. S1/S2 are genuine
 Windows screenshots. S2 shows the package reopened before the automatic style fix.
+The first repaired ZIP failed Raynald's desktop style recheck (pipeline 1.2 s,
+28 source / 56 normalized rows, zero errors). The replacement retains callbacks
+at module level and passes two native Windows GUI regression paths; its desktop
+recheck is pending. The earlier same-context test did not cover wrapper lifetime.
 
 ## Install and run on Windows
 
@@ -66,10 +70,11 @@ its provenance is retained in events.notes.
 |---|---|
 | ZIP enables and pipeline runs through qgis_process on 3.44.15 and 4.2.3 | Automated pass |
 | All five algorithm IDs, field types, styles, deterministic tables, CRS and UNKNOWN rules | Automated pass |
-| GUI loader uses final package styles without reopening | Automated regression pass on Qt5, Qt6 and native Windows 3.44.15 |
+| GUI loader uses final package styles without reopening | Fresh-context and background-worker regression pass on Qt5, Qt6 and native Windows 3.44.15 |
 | Menu lifecycle across two reloads | Automated interface test pass |
 | Windows operation and reopened-package styles; S1/S2 | Reported by Raynald, operated by Claude under his instructions |
-| Desktop recheck with the repaired ZIP; independent clean-copy run | Pending |
+| First repaired ZIP desktop style recheck | FAILED on Windows 3.44.15; pipeline data succeeded in 1.2 s |
+| Replacement ZIP desktop recheck; independent clean-copy run | Pending |
 
 Capture S1: Processing Toolbox showing the provider and the pipeline dialog.
 Capture S2: styled result map with the rw_priority attribute table open.
@@ -85,11 +90,19 @@ as evidence of the original reopened-package view.
 
 1. Install the rebuilt `dist/km_flood_priority-1.0.0.zip`, then close and reopen QGIS
    to clear the previously imported plugin modules.
-2. Run the same local inputs to a **new** GeoPackage. Inspect rw_priority immediately:
+2. Run the same local inputs to **data/processed/style_recheck_v2.gpkg**. Inspect rw_priority immediately:
    HIGH/MEDIUM/VERIFY/NO_RECORD categories and RW/episode labels must appear without
    manually reopening the file. Layer Properties → Symbology should show Categorized.
-3. Record the result in PROGRESS.md. The original Windows operation already passed;
-   this checks deployment of the repaired build. No data transcription is required.
+3. In the Processing dialog's Log tab, check five `postProcessLayer(name)` entries
+   and five `restored name style (...)` entries for rw_priority, safe_points,
+   access_routes, roads and kelurahan_boundary. Record the result and save the new
+   screenshot as `dist/local-data/S2_style_recheck_v2.png`. Keep the failed evidence.
+
+Expected renderers: rw_priority, safe_points and access_routes are Categorized.
+roads and kelurahan_boundary intentionally use Single Symbol: roads are grey
+`#bdbdbd` at 0.15 mm; the boundary has a dark `#252525` outline at 0.8 mm with no
+fill. Their renderer type alone does not indicate failure. The log must confirm
+restoration for all five layers. No data transcription is required.
 
 Save the actual screenshots as `docs/figures/S1_pipeline.png` and
 `docs/figures/S2_results.png`. A 30–60 second installation → pipeline → map demo

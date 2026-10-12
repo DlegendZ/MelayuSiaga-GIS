@@ -301,3 +301,50 @@ repaired build's desktop recheck is a separate pending deployment check. Demo,
 independent clean-copy reproduction, final two-page PDF and framing/language
 alignment remain pending. Remote CI/tag/release remain deferred under the owner's
 no-push instruction; this update does not claim global Phase 5/6 acceptance.
+
+## 2026-10-13 — Failed desktop style recheck; module-level callback repair
+
+1. Raynald reported that the previous 60,700-byte ZIP failed the native Windows
+   QGIS 3.44.15 style recheck after installation, restart, a fresh project and
+   `data/processed/style_recheck.gpkg`. Pipeline data succeeded in **1.2 s**, with
+   **28 source / 56 normalized rows and zero errors**, but rw_priority, safe_points
+   and access_routes remained singleSymbol. No postprocessor error was logged.
+   Inspected and preserved the original local screenshot
+   `dist/local-data/S2_style_recheck_FAILED.png` (gitignored), SHA-256
+   `23dc3b14bd696619703cf145b5af051855a8d7c311450d021d1a1a6b14672874`.
+2. Reproduced the failure on the installed Windows runtime before changing the
+   repair: transferred C++ completion results into a new QgsProcessingContext,
+   released the execution wrapper, forced garbage collection and ran QGIS's actual
+   `processing.gui.Postprocessing.handleAlgorithmResults`. Priority remained
+   singleSymbol. The earlier test retained the same Python context wrapper, so its
+   pass did not establish callback survival across GUI wrapper lifetimes. This
+   supersedes the earlier claim that a context attribute protects those callbacks.
+3. Replaced context-owned Python references with the module's
+   `PackageStylePostProcessor._instances` list and a create factory. Each queued
+   output has its own retained callback. C++ still owns the objects; stale SIP
+   wrappers are pruned after C++ context destruction on the next creation.
+   `postProcessLayer(name)` now logs entry with the final source URI, calls
+   loadDefaultStyle after GUI layer loading, repaints and logs the restored renderer.
+   The postprocessor remains the chosen after-load restoration path. An additional
+   project-signal/timer fallback was considered but is not installed: context-transfer
+   and actual GUI worker tests now explicitly require callback execution for all
+   five layers, including when the old wrapper is no longer reachable.
+4. Verification: **14 integration tests pass on EACH QGIS 3.44.15/Qt5 (32.30 s)
+   and 4.2.3/Qt6 (35.26 s)**. The two GUI cases use a fresh completion context;
+   one runs through the same QgsProcessingAlgRunnerTask used by AlgorithmDialog.
+   Neither test retains a postprocessor or execution-context reference after
+   execution. Both assert final priority URI, categorizedSymbol, four categories,
+   labels, target/route categories, roads/boundary colours and widths, all five
+   entry/success logs and no embedded-style error. The same two cases pass on
+   **native Windows QGIS 3.44.15 (2.89 s)**. Unit checks: **116 pass, 99.18% core
+   coverage**. Roads and kelurahan_boundary intentionally retain singleSymbol
+   renderers; their defined grey roads / dark outline distinguish valid styling
+   from the random defaults. Analysis, source data and accepted classes are unchanged.
+5. Rebuilt **local** `dist/km_flood_priority-1.0.0.zip`: **60,930 bytes**, SHA-256
+   `b136fd06beb6f91f3eb8bf90dedcb77db1c4fe33b384bddee8de41a84e4fbfff`.
+   Public ZIP still excludes sample_data; the separate local-only data bundle is
+   unchanged. Updated README, USER_GUIDE, HUMAN_TASKS and brief test counts to
+   distinguish the failed desktop check from the replacement build's automated
+   passes. Native desktop recheck of this ZIP is **pending**, using a new
+   `data/processed/style_recheck_v2.gpkg` and the five callback logs. All commits
+   stay local; **no push**, tag or release.
