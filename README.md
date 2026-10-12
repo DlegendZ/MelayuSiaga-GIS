@@ -17,9 +17,11 @@ See [progress](docs/PROGRESS.md) and [human tasks](docs/HUMAN_TASKS.md).
 Phase 0 setup and Phase 2 core are complete. The core and acquisition helpers pass
 116 unit tests with 99.18% core coverage. Official boundaries and an OSM snapshot have
 been acquired and a five-layer metric GeoPackage prepared. The downloaded PPID PDF
-has produced 28 source-located draft rows. Four Satu Data CSVs were acquired and audited;
-the exports are monthly context or require source correction. Human PPID verification
-and unresolved year/source decisions remain pending. An installable plugin
+has produced 28 source-located rows, accepted by Raynald after Claude's delegated
+independent check. The clean and merged event tables pass validation, with coverage
+**2025 only**. Four Satu Data CSVs were audited and excluded because they are monthly
+context or require source resolution. Phase 1 input acceptance is complete for this
+PPID-only working set. An installable plugin
 and real-data findings follow their acceptance gates.
 
 ## Development

@@ -344,7 +344,16 @@ If the agent environment blocks the network: produce the script, then mark the t
 1. [H] downloads the PDF to `data/raw/ppid/`.
 2. [A] tries text extraction (`pdfplumber`, run in a dev venv, **not** inside the plugin). If the PDF is scanned, [A] runs OCR (`ocrmypdf`/`tesseract`) and flags low confidence.
 3. [A] pre-fills `data/interim/ppid_2025_draft.csv` (canonical schema) with **only** Kampung Melayu rows. Every row records `source_ref = "p.<page>"`.
-4. [H] checks every row against the PDF, sets `location_confidence`, sets `verified=Y`, and saves `data/clean/events_ppid_2025.csv`. The agent never marks rows verified.
+4. [H] checks every row against the PDF, sets `location_confidence`, sets `verified=Y`, and saves `data/clean/events_ppid_2025.csv`. The agent never marks rows verified without user authorization.
+
+**User-authorized PPID25 exception, 2026-10-12:** Raynald accepted Claude's independent
+second check (pdftotext extraction, visual row checks and completeness check) and
+explicitly instructed the agent to set all 28 rows to `verified=Y` and
+`location_confidence=RW`. The report is `data/interim/ppid_2025_draft.check.md`.
+Record `checked 2026-10-12 by Claude (delegated by Raynald)` in every row. This is
+user-approved delegated AI review, not a claim that a human visually checked every row.
+Preserve Nihil impact cells as NULL and source inconsistencies in notes. This exception
+applies only to the explicitly accepted PPID25 rows; other sources remain unverified.
 
 **D2 — Satu Data Jakarta [A+H]:** [H] downloads each year's CSV to `data/raw/satudata/`. [A] writes `scripts/convert_satudata.py`, which maps columns to the canonical schema (column names differ by year; keep a per-year mapping dict, fail loudly on unknown columns). Filter to Kampung Melayu + Jatinegara and set `location_confidence = RW`. Output goes to `data/clean/events_satudata_<year>.csv`.
 

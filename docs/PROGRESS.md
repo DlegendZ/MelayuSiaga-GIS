@@ -93,3 +93,31 @@
 - Validation: all 116 unit cases pass; core coverage 99.18%; lint and formatting pass.
   Commit remains local; no push.
 
+## 2026-10-12 — PPID accepted by user; Phase 1 working set accepted
+
+- Raynald explicitly accepted Claude's independent second check of all 28 rows and
+  instructed Y/RW flags. The report describes separate pdftotext extraction, visual
+  checks and completeness checks. This is user-authorized delegated AI review, not
+  direct human row checking; the exception is recorded in the execution specification.
+- Saved `data/clean/events_ppid_2025.csv` with the exact provenance note
+  `checked 2026-10-12 by Claude (delegated by Raynald)` in every row. The only changed
+  fields relative to the original draft are verified, location_confidence and notes.
+  The original draft and source PDF remain unchanged. A checksum review receipt
+  beside the clean CSV records source, draft, report and clean-file identities.
+- Retained all three Nihil affected KK/people pairs as NULL (not zero). Added source
+  inconsistency notes on p.14 NO 15 / 6 July and p.15 NO 20 / 7 July: evacuation totals
+  58 KK/184 people and 104 KK/352 people exceed affected totals 44 KK/125 people.
+  Kept JUMLAH TERDAMPAK values unchanged as instructed.
+- Ran `merge_sources.py`: 28 source rows / 56 normalized RW rows, all Y/RW; zero
+  schema errors, warnings or duplicates; zero missing depths; accepted coverage [2025].
+  Source inconsistencies remain in notes and are not concealed by the schema result.
+- Phase 1 acceptance criteria are met for the current PPID-only working set: validated
+  inputs.gpkg, schema-valid events_all.csv, documented sources and known event coverage.
+  Satu Data exports remain excluded with documented granularity/conflict limitations;
+  2021/2022 availability remains unresolved. No multi-year finding is claimed.
+- Code is unchanged by this data acceptance; the previous 116 passing tests and 99.18%
+  core coverage remain the latest unit result. Data integrity was checked by comparing
+  every clean row against the draft/report and by running the real import validator.
+- Downloaded/accepted datasets remain local and gitignored pending redistribution
+  confirmation. Documentation is committed locally; no push.
+

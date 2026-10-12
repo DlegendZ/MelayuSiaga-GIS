@@ -1,25 +1,20 @@
 # Human tasks
 
-## Start now: verify the PPID draft (10–15 minutes)
+## PPID review accepted — 2026-10-12
 
-The user saved `data/raw/ppid/REKAP_BANJIR_TAHUN_2025.pdf`. Extraction has completed:
-28 draft rows, all `verified=N` and `location_confidence=UNKNOWN`.
+Raynald explicitly accepted Claude's independent second check and authorized all
+28 rows as `verified=Y`, `location_confidence=RW`. This is delegated AI review,
+not a claim of direct human visual checking. The original draft remains N/UNKNOWN.
 
-1. Open `data/interim/ppid_2025_draft.review.md` and the original PDF side by side.
-2. Check each cited page/NO against date, ALAMAT, RW/RT, water height, affected KK and
-   people. Use the **JUMLAH TERDAMPAK** columns; evacuation totals are separate.
-3. Correct mismatches. Source totals shared between RWs are not allocated per RW.
-   `Nihil` remains NULL; the source does not specify a next-day date for receding times.
-4. For rows you checked with explicitly stated RW codes, set `location_confidence=RW`
-   and `verified=Y`; leave unchecked rows at N. Save UTF-8 comma-separated CSV as
-   `data/clean/events_ppid_2025.csv`, or tell the agent exactly which rows you checked
-   and any corrections. Only your check can authorize these verification flags.
-5. Start with PDF page 3, NO 17: 29 January 2025, RW 04/05, 130 cm, 91 KK, 280 people
-   (under 2 minutes). Then work through the remaining references in the review table.
+The checked table is `data/clean/events_ppid_2025.csv`, with review provenance in
+the adjacent `.review.json`. Every row records
+`checked 2026-10-12 by Claude (delegated by Raynald)`. Three Nihil impact pairs remain
+NULL. Source NO 15 (6 July) and NO 20 (7 July) retain the affected totals 44 KK/125
+people and note that the source evacuation totals exceed them.
 
-Required by `EXECUTION_SPEC.md` §6 D1: "[H] checks every row against the PDF,
-sets `location_confidence`, sets `verified=Y`". Extraction and agent visual review
-do not satisfy that human acceptance step.
+`data/processed/events_all.csv` passes validation: 28 source rows, 56 normalized
+RW rows, zero schema errors, zero duplicates, all Y/RW, recorded coverage 2025.
+No further PPID row review is required for this accepted working set.
 
 ## Lecturer alignment (2 minutes to send)
 
@@ -37,17 +32,18 @@ Implementation continues while this confirmation is pending, as permitted by Pha
 ## Phase 1: download and verify real event data
 
 1. Preserve the downloaded PPID original unchanged; its source link and checksum
-   have been registered. Complete the review above.
+   have been registered. PPID review is accepted as recorded above.
 2. The agent downloaded the located Satu Data exports (2020, 2023, 2024, general
    2025/2026) to `data/raw/satudata/` and audited them. Do not redownload those files.
-   After the PPID review, inspect the [source audit](DATA_SOURCES.md#satu-data-granularity-audit--2026-10-12).
+   The [source audit](DATA_SOURCES.md#satu-data-granularity-audit--2026-10-12) documents
+   why these exports are excluded from the current event table.
    Eligible dated RW events for 2021/2022 remain unresolved; 2023–2025 exports are
    monthly context only, and the 2020 export has date/period conflicts.
 3. Append to the existing `data/clean/sources.csv` (or copy the source template if absent) and record
    each download's source ID, title, publisher, URL, download date, years, and stated terms.
-4. After PPID review, decide whether to use verified PPID 2025 alone with the recorded
-   Satu Data limitations, or investigate the unresolved sources further. This decision
-   is pending; no multi-year coverage or missing-year absence has been asserted.
+4. The accepted working set currently uses PPID 2025 only. Additional Satu Data
+   sources can be investigated and added later if dated RW evidence is resolved.
+   No multi-year coverage or missing-year absence is asserted.
 5. Use the safe-point and closure templates for source-backed values. Candidate sites
    remain `verified=N`. Missing verified evidence is allowed and yields UNKNOWN access.
 

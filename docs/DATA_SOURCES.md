@@ -1,14 +1,15 @@
 # Data sources and licenses
 
 Official boundaries and an OSM snapshot were acquired on **2026-10-12**. The user
-downloaded the PPID PDF; 28 source-located event rows were extracted as unverified
-drafts. Four Satu Data CSV exports were also downloaded and audited. Human PPID
-verification and unresolved Satu Data year/source checks are pending. Working downloads are
+downloaded the PPID PDF and accepted Claude's delegated independent check of all
+28 rows. Those rows are Y/RW by Raynald's explicit instruction; the original draft
+remains unverified. Four Satu Data CSV exports were also downloaded and audited.
+Unresolved Satu Data year/source checks remain recorded limitations. Working downloads are
 gitignored until redistribution terms are confirmed.
 
 | ID | Publisher / source | Use | Retrieval and terms |
 |---|---|---|---|
-| D1 | [PPID Kota Jakarta Timur, 2025 flood recap](https://timur.jakarta.go.id/ppid/storage/files/setko-260609-075654-x938X6Z0-REKAP_BANJIR_TAHUN_2025_compressed.pdf) | Recorded events | Human download completed 2026-10-12; 23 pages, 28 draft rows; verification and redistribution terms pending |
+| D1 | [PPID Kota Jakarta Timur, 2025 flood recap](https://timur.jakarta.go.id/ppid/storage/files/setko-260609-075654-x938X6Z0-REKAP_BANJIR_TAHUN_2025_compressed.pdf) | Recorded events | Human download completed 2026-10-12; 23 pages, 28 Y/RW rows accepted by Raynald after delegated Claude review; redistribution terms pending |
 | D2 | [Satu Data Jakarta / national catalog](https://data.go.id/dataset/dataset/data-kejadian-bencana-banjir-di-provinsi-dki-jakarta-tahun-2020) | Supplementary source audit | Four original CSVs acquired 2026-10-12; none accepted for date/RW event analysis; see audit below |
 | D3 | [Dinas Cipta Karya, Tata Ruang, dan Pertanahan DKI Jakarta — RW](https://gis-dpmptsp.jakarta.go.id/arcgis/rest/services/Hosted/ADMINISTRASI_AR_RW/FeatureServer/18) | RW analysis units | Acquired 2026-10-12, 9 RW (01–09); redistribution permission unresolved |
 | D4 | [DKI kelurahan layer 85](https://gis-dpmptsp.jakarta.go.id/arcgis/rest/services/Hosted/Batas_Administrasi_Kelurahan_DKI_Jakarta/FeatureServer/85) | Boundary | Acquired 2026-10-12, one polygon; indicative administrative boundaries |
@@ -42,14 +43,19 @@ The prepared GeoPackage contains 9 RW, 1 kelurahan polygon, 3,154 road features,
 34,617 building features and 440 candidate safe points, all in EPSG:32748. Every
 candidate remains `verified=N`; these counts do not establish evacuation suitability.
 
-The PPID draft contains source dates in 2025 only, with direct RW labels 04/05 and
-07/08. Normalization yields 56 RW rows with zero schema errors; this is a draft
-validation, not accepted findings. Each source row cites the PDF page, table and
+The accepted PPID table contains source dates in 2025 only, with direct RW labels
+04/05 and 07/08. Normalization yields 56 RW rows with zero schema errors and zero
+duplicates. All 28 source rows are Y/RW under the user-authorized delegated review
+exception documented in the execution spec. This is input acceptance, not priority
+findings. Each source row cites the PDF page, table and
 source NO. Water-height qualifiers (Banjir/Genangan) are preserved in notes. Affected
 KK/people are shared source totals and cannot be summed over exploded RW copies.
 
-Accepted year coverage remains pending human review and the Satu Data availability
-audit. The 2020 listing does not establish Kampung Melayu records for other years.
+Accepted event-year coverage is **2025 only**. The 2020 listing does not establish
+accepted Kampung Melayu event records for other years. Source NO 15 (6 July) and
+NO 20 (7 July) have evacuation counts exceeding affected counts; these source
+inconsistencies are noted, while JUMLAH TERDAMPAK values remain unchanged. Nihil in
+affected KK/people remains NULL for 28 February, 5 August and 10 August.
 
 ## Satu Data granularity audit — 2026-10-12
 
@@ -84,6 +90,7 @@ The converter now rejects mappings from those fields to `rw_raw`.
 Reproduce the local audit with `scripts/audit_satudata.py` (command in the README).
 Detailed source row references are in `data/interim/satudata_audit.json`. The report
 is an acquisition-quality audit, not a flood-priority finding. No canonical Satu Data
-event CSV was created. Acceptance still requires a decision on unresolved/unsuitable
-sources, honestly stated coverage, and the human-checked PPID event table.
+event CSV was created. These exports are excluded from the current PPID-only working
+set, with 2021/2022 unresolved availability and other limitations recorded explicitly.
+Future inclusion requires source resolution and a new acceptance, not inferred values.
 
