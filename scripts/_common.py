@@ -18,6 +18,9 @@ def read_csv(path):
     with Path(path).open(encoding="utf-8-sig", newline="") as handle:
         reader = csv.reader(handle)
         headers = next(reader, [])
+        # Some publisher exports prepend two UTF-8 BOMs; utf-8-sig consumes only one.
+        if headers:
+            headers[0] = headers[0].lstrip("\ufeff")
         if len(headers) != len(set(headers)):
             raise ValueError(f"{path}: duplicate CSV column names")
         rows = []

@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from scripts._common import read_csv, save_snapshot, write_csv
+from scripts.audit_satudata import inspect_source
 from scripts.convert_satudata import convert
 from scripts.extract_ppid_pdf import draft_rows, draft_timur_2025
 from scripts.fetch_admin_boundaries import validate_rw
@@ -26,6 +27,14 @@ def test_csv_quotes_and_newlines_roundtrip(tmp_path):
     with pytest.raises(FileExistsError):
         write_csv(path, rows[0], [{"event_id": "OTHER", "notes": "replacement"}])
     assert read_csv(path)[1] == rows
+
+
+def test_csv_repeated_utf8_bom_does_not_change_first_column(tmp_path):
+    path = tmp_path / "publisher_export.csv"
+    path.write_bytes(b"\xef\xbb\xbf\xef\xbb\xbfevent_id,notes\r\nTEST-1,TESTVILLE\r\n")
+    headers, rows = read_csv(path)
+    assert headers == ["event_id", "notes"]
+    assert rows == [{"event_id": "TEST-1", "notes": "TESTVILLE"}]
 
 
 def test_source_mapping_filter_and_verification():
@@ -52,6 +61,66 @@ def test_unknown_csv_column_stops_conversion():
     mapping = json.loads((FIXTURES / "satudata_mapping.json").read_text())
     with pytest.raises(ValueError, match="unknown"):
         convert([*headers, "unknown_new_column"], rows, mapping, year=2025, source_id="SYNTHETIC")
+
+
+def test_affected_rw_count_cannot_be_mapped_to_spatial_rw_code():
+    headers, rows = read_csv(FIXTURES / "satudata.csv")
+    mapping = json.loads((FIXTURES / "satudata_mapping.json").read_text())
+    count_column = "jumlah_rw_terdampak"
+    headers = [count_column if name == "test_rw" else name for name in headers]
+    rows = [
+        {count_column if key == "test_rw" else key: value for key, value in row.items()}
+        for row in rows
+    ]
+    mapping["column_map"]["rw_raw"] = count_column
+    with pytest.raises(ValueError, match="count.*RW code"):
+        convert(headers, rows, mapping, year=2025, source_id="SYNTHETIC")
+
+
+def test_monthly_aggregate_is_context_without_inventing_date_or_rw():
+    rows = [
+        {
+            "periode_data": "202503",
+            "bulan": "2",
+            "kelurahan": "TESTVILLE",
+            "kecamatan": "TEST DISTRICT",
+            "jumlah_rw_terdampak": "4",
+        }
+    ]
+    result = inspect_source(list(rows[0]), rows, kelurahan="TESTVILLE", kecamatan="TEST DISTRICT")
+    assert result["usage"] == "context_only"
+    assert result["target_rows"][0]["issues"] == ["no_exact_event_date", "no_rw_codes"]
+    assert result["target_rows"][0]["rw_raw"] == ""
+
+
+def test_source_period_date_conflict_and_unknown_rw_require_review():
+    rows = [
+        {
+            "periode_data": "201912",
+            "tanggal_kejadian": "06/12/2020",
+            "rw": "0",
+            "kelurahan": "TESTVILLE",
+            "kecamatan": "TEST DISTRICT",
+        }
+    ]
+    result = inspect_source(list(rows[0]), rows, kelurahan="TESTVILLE", kecamatan="TEST DISTRICT")
+    assert result["usage"] == "source_review_required"
+    assert result["target_rows"][0]["issues"] == ["period_date_conflict", "rw_unassigned"]
+
+
+def test_monthly_list_of_dates_is_not_expanded_to_rw_date_cross_product():
+    rows = [
+        {
+            "periode_data": "202001",
+            "tanggal_kejadian": "tgl. 01, 09, 18 Januari",
+            "rw": "RW 01, 02",
+            "kelurahan": "TESTVILLE",
+            "kecamatan": "TEST DISTRICT",
+        }
+    ]
+    result = inspect_source(list(rows[0]), rows, kelurahan="TESTVILLE", kecamatan="TEST DISTRICT")
+    assert len(result["target_rows"]) == 1
+    assert result["target_rows"][0]["issues"] == ["date_needs_source_transcription"]
 
 
 def test_osm_candidates_never_auto_verified():

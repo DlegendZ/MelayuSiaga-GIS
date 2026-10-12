@@ -2,13 +2,14 @@
 
 Official boundaries and an OSM snapshot were acquired on **2026-10-12**. The user
 downloaded the PPID PDF; 28 source-located event rows were extracted as unverified
-drafts. Human verification and Satu Data availability checks are still pending. Working downloads are
+drafts. Four Satu Data CSV exports were also downloaded and audited. Human PPID
+verification and unresolved Satu Data year/source checks are pending. Working downloads are
 gitignored until redistribution terms are confirmed.
 
 | ID | Publisher / source | Use | Retrieval and terms |
 |---|---|---|---|
 | D1 | [PPID Kota Jakarta Timur, 2025 flood recap](https://timur.jakarta.go.id/ppid/storage/files/setko-260609-075654-x938X6Z0-REKAP_BANJIR_TAHUN_2025_compressed.pdf) | Recorded events | Human download completed 2026-10-12; 23 pages, 28 draft rows; verification and redistribution terms pending |
-| D2 | [Satu Data Jakarta](https://satudata.jakarta.go.id/open-data/detail/data-kejadian-bencana-banjir-di-provinsi-dki-jakarta-tahun-2020) | Multi-year events | Available years 2020–2025 and actual CSV columns must be checked |
+| D2 | [Satu Data Jakarta / national catalog](https://data.go.id/dataset/dataset/data-kejadian-bencana-banjir-di-provinsi-dki-jakarta-tahun-2020) | Supplementary source audit | Four original CSVs acquired 2026-10-12; none accepted for date/RW event analysis; see audit below |
 | D3 | [Dinas Cipta Karya, Tata Ruang, dan Pertanahan DKI Jakarta — RW](https://gis-dpmptsp.jakarta.go.id/arcgis/rest/services/Hosted/ADMINISTRASI_AR_RW/FeatureServer/18) | RW analysis units | Acquired 2026-10-12, 9 RW (01–09); redistribution permission unresolved |
 | D4 | [DKI kelurahan layer 85](https://gis-dpmptsp.jakarta.go.id/arcgis/rest/services/Hosted/Batas_Administrasi_Kelurahan_DKI_Jakarta/FeatureServer/85) | Boundary | Acquired 2026-10-12, one polygon; indicative administrative boundaries |
 | D5 | [OpenStreetMap contributors / Overpass](https://overpass-api.de/api/interpreter) | Roads, buildings, candidate sites | Acquired 2026-10-12; © OpenStreetMap contributors, ODbL; 440 candidates are unverified |
@@ -49,4 +50,40 @@ KK/people are shared source totals and cannot be summed over exploded RW copies.
 
 Accepted year coverage remains pending human review and the Satu Data availability
 audit. The 2020 listing does not establish Kampung Melayu records for other years.
+
+## Satu Data granularity audit — 2026-10-12
+
+The national catalog embeds the publisher's direct CSV export URLs. They were
+downloaded unchanged from `satudata.jakarta.go.id`, with retrieval metadata and
+SHA-256 sidecars in `data/raw/satudata/`. The download work is complete for the four
+located exports; their contents must not be treated as automatically usable events.
+
+| Dataset label | Catalog | Source rows / target-area rows | Current use |
+|---|---|---|---|
+| 2020 | [2020 catalog](https://data.go.id/dataset/dataset/data-kejadian-bencana-banjir-di-provinsi-dki-jakarta-tahun-2020) | 902 / 51 | Source review required: 33 target rows lack a single full date, 18 full dates conflict with the period field, 36 have RW=0; issue counts overlap |
+| 2021 | [Older general-disaster listing](https://proxyapps.data.go.id/dataset/?_tags_limit=0&organization=provinsi-dki-jakarta&tags=Provinsi) | CSV not acquired | A 2021 general-disaster title was located; an eligible flood event export was not located in this bounded audit; availability unresolved |
+| 2022 | No eligible event export located in this bounded audit | CSV not acquired | Availability unresolved; hazard-point/count datasets are not dated RW events |
+| 2023 | [2023 catalog](https://data.go.id/dataset/dataset/data-kejadian-bencana-banjir-tahun-2023) | 194 / 6 | Context only: monthly aggregates lack event dates and actual RW codes |
+| 2024 | [2024 catalog](https://data.go.id/dataset/dataset/data-kejadian-bencana-banjir-tahun-2024) | 260 / 9 | Context only: monthly aggregates lack event dates and actual RW codes |
+| General export, publisher periods 2025/2026 | [General catalog](https://data.go.id/dataset/dataset/data-kejadian-bencana-banjir1) | 392 / 9 | Context only: monthly aggregates; the rolling export also contains 2026 data |
+
+The target filter checks both Kampung Melayu and Jatinegara. For example, the 2020
+export records `periode_data=201912` alongside `tanggal_kejadian=06/12/2020`.
+Other rows list several dates and several RWs without stating which RW was affected
+on which date. No Cartesian expansion, inferred calendar day, or inferred RW is made.
+The `jumlah_rw_terdampak` and `jumlah_terdampak_rw` fields are counts, not unit codes.
+The converter now rejects mappings from those fields to `rw_raw`.
+
+| Raw snapshot | SHA-256 |
+|---|---|
+| `satudata_2020_20261012.csv` | `fce1271e61dee02b004ac384355072871a9dd0aa8753120fcc92b52853d1fe29` |
+| `satudata_2023_20261012.csv` | `e6405f578609ccf5688fa69af224bf7c3200391ef961d97aab2b1062683b7ea1` |
+| `satudata_2024_20261012.csv` | `679a1bdcee4d557c8244c7530f3c789f02605870bd7d6dae74018be1097859f8` |
+| `satudata_general_20261012.csv` | `56985260f278425aa01dd73a8f8208dee90f90dce78d0564da151abef5c13f1f` |
+
+Reproduce the local audit with `scripts/audit_satudata.py` (command in the README).
+Detailed source row references are in `data/interim/satudata_audit.json`. The report
+is an acquisition-quality audit, not a flood-priority finding. No canonical Satu Data
+event CSV was created. Acceptance still requires a decision on unresolved/unsuitable
+sources, honestly stated coverage, and the human-checked PPID event table.
 

@@ -17,6 +17,7 @@ from km_flood_priority.core.schema import EVENT_COLUMNS
 # Populate only after inspecting an actual downloaded year's headers, never from guessed names.
 YEAR_COLUMN_MAPPINGS: dict[int, dict] = {}
 REQUIRED_MAPPED_FIELDS = {"event_date", "kota", "kecamatan", "kelurahan", "rw_raw"}
+RW_COUNT_COLUMNS = {"jumlah_rw_terdampak", "jumlah_terdampak_rw"}
 
 
 def convert(
@@ -27,6 +28,10 @@ def convert(
         raise ValueError("Mapping contains unknown canonical event fields")
     if REQUIRED_MAPPED_FIELDS - set(column_map):
         raise ValueError("Mapping must explicitly identify date, city, district, kelurahan and RW")
+    if column_map["rw_raw"].lower() in RW_COUNT_COLUMNS:
+        raise ValueError(
+            "An affected-RW count cannot be used as an RW code; retain as context only"
+        )
     missing = set(column_map.values()) - set(headers)
     unknown = set(headers) - set(column_map.values()) - set(mapping.get("ignored_columns", []))
     if missing or unknown:

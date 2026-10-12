@@ -72,3 +72,24 @@
   event table and accepted year coverage remain pending. Phase 3 has not started.
 - All commits remain local; no push has been performed.
 
+## 2026-10-12 — Satu Data exports acquired and audited
+
+- Continued independent Phase 1 work while awaiting the user's PPID row verification.
+  The national catalog exposed direct publisher export URLs that were not visible
+  in the text-only Satu Data page. Downloaded four immutable CSV snapshots and metadata.
+- Exact target filtering found 51 rows in the 2020-labeled export, 6 in 2023, 9 in
+  2024, and 9 in the general export whose publisher periods include 2025 and 2026.
+  Raw row totals are 902, 194, 260, and 392 respectively.
+- Added a reproducible source-granularity audit. The 2020 target rows have 33 date
+  transcription issues, 18 period/date conflicts, and 36 RW=0 cases (overlapping).
+  The other exports lack exact event dates and RW codes and remain context only.
+  No date/RW cross product or synthetic calendar day was created; no Satu Data event
+  table was published. Eligible exports for 2021/2022 remain unresolved, not proven absent.
+- Fixed repeated UTF-8 BOM handling in publisher CSV headers. Added a converter guard
+  against assigning affected-RW counts to `rw_raw`. Regression cases use TESTVILLE.
+- The independent acquisition audit does not satisfy the human PPID check required
+  in §6 D1. Phase 1 remains pending that check, source-use decisions and events_all.csv;
+  Phase 3 has not started. No data verification flag was changed.
+- Validation: all 116 unit cases pass; core coverage 99.18%; lint and formatting pass.
+  Commit remains local; no push.
+

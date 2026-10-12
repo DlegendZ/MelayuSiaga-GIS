@@ -15,10 +15,11 @@ The three-person group and study area framing await lecturer confirmation.
 The [execution specification](docs/EXECUTION_SPEC.md) defines the phase gates.
 See [progress](docs/PROGRESS.md) and [human tasks](docs/HUMAN_TASKS.md).
 Phase 0 setup and Phase 2 core are complete. The core and acquisition helpers pass
-111 unit tests with 99.18% core coverage. Official boundaries and an OSM snapshot have
+116 unit tests with 99.18% core coverage. Official boundaries and an OSM snapshot have
 been acquired and a five-layer metric GeoPackage prepared. The downloaded PPID PDF
-has produced 28 source-located draft rows; human verification and Satu Data year
-availability checks remain pending. An installable plugin
+has produced 28 source-located draft rows. Four Satu Data CSVs were acquired and audited;
+the exports are monthly context or require source correction. Human PPID verification
+and unresolved year/source decisions remain pending. An installable plugin
 and real-data findings follow their acceptance gates.
 
 ## Development
@@ -65,7 +66,8 @@ The preparation script validates administrative areas, repairs/reprojects geomet
 clips context layers, and writes `data/processed/inputs.gpkg` plus a validation report.
 Its five layers are `rw`, `kelurahan_boundary`, `roads`, `buildings`, `safe_points`.
 Register snapshot metadata in `data/clean/sources.csv`. The current registry already
-contains the two official boundary sources, the 2026-10-12 OSM snapshot, and PPID25.
+contains the two official boundary sources, the 2026-10-12 OSM snapshot, PPID25,
+and the four audited Satu Data snapshots.
 
 Download event datasets yourself using [the human checklist](docs/HUMAN_TASKS.md).
 After a PDF is available, the agent extracts a draft with `extract_ppid_pdf.py`; every
@@ -87,6 +89,18 @@ The profile handles continuation pages, excludes the monthly summary, reads RW
 labels separately from RT numbers, and keeps affected counts separate from evacuees.
 It leaves `Nihil` impact cells NULL and flags all rows unverified with UNKNOWN confidence.
 Existing draft CSVs are protected: use another `--output` to repeat extraction.
+
+Audit the downloaded publisher exports without generating canonical events:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/audit_satudata.py data/raw/satudata/satudata_2020_20261012.csv data/raw/satudata/satudata_2023_20261012.csv data/raw/satudata/satudata_2024_20261012.csv data/raw/satudata/satudata_general_20261012.csv
+```
+
+The report is `data/interim/satudata_audit.json`. Monthly aggregate exports lack
+event dates and RW identities; the 2020 export contains inconsistent period/date
+fields. See the [source audit](docs/DATA_SOURCES.md#satu-data-granularity-audit--2026-10-12)
+before using these datasets. The CSV reader handles repeated leading UTF-8 BOMs
+without modifying raw files; the converter rejects affected-RW count fields as RW codes.
 
 Phase 1 is accepted only when the prepared inputs, valid event table, source registry,
 and actual recorded year coverage are available. The full pipeline CLI, plugin ZIP,

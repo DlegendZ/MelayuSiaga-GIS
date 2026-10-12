@@ -38,13 +38,16 @@ Implementation continues while this confirmation is pending, as permitted by Pha
 
 1. Preserve the downloaded PPID original unchanged; its source link and checksum
    have been registered. Complete the review above.
-2. Open the [2020 Satu Data dataset](https://satudata.jakarta.go.id/open-data/detail/data-kejadian-bencana-banjir-di-provinsi-dki-jakarta-tahun-2020).
-   Download the CSV to `data/raw/satudata/`. Check the same title for each year 2021–2025;
-   record unavailable years explicitly. Send the original filenames and source URLs.
+2. The agent downloaded the located Satu Data exports (2020, 2023, 2024, general
+   2025/2026) to `data/raw/satudata/` and audited them. Do not redownload those files.
+   After the PPID review, inspect the [source audit](DATA_SOURCES.md#satu-data-granularity-audit--2026-10-12).
+   Eligible dated RW events for 2021/2022 remain unresolved; 2023–2025 exports are
+   monthly context only, and the 2020 export has date/period conflicts.
 3. Append to the existing `data/clean/sources.csv` (or copy the source template if absent) and record
    each download's source ID, title, publisher, URL, download date, years, and stated terms.
-4. After checks, tell the agent which Satu Data years were actually available or missing.
-   Recorded 2025 dates in the PPID draft do not establish multi-year coverage.
+4. After PPID review, decide whether to use verified PPID 2025 alone with the recorded
+   Satu Data limitations, or investigate the unresolved sources further. This decision
+   is pending; no multi-year coverage or missing-year absence has been asserted.
 5. Use the safe-point and closure templates for source-backed values. Candidate sites
    remain `verified=N`. Missing verified evidence is allowed and yields UNKNOWN access.
 
