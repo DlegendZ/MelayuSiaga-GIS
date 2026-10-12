@@ -433,3 +433,24 @@ no-push instruction; this update does not claim global Phase 5/6 acceptance.
 - GitHub access verified for DlegendZ/MelayuSiaga-GIS; remote default is main and
   its fetched starting point is the initial commit. Next: merge/push, remote CI and
   the spec's release ZIP. No remote success or release existence is claimed here.
+
+## 2026-10-13 — Main pushed; clean-checkout CI temporary-directory fix
+
+- Merged codex/flood-priority-foundation into main without rewriting history;
+  merge commit **45fe485** was pushed to origin/main under Raynald's authorization.
+- First remote workflow run **38306940517** exposed a test setup issue: pytest's
+  configured `.tmp/pytest` base directory required an ignored parent that is absent
+  in a fresh checkout. Unit tests reached 113 passes / 3 setup errors; each QGIS
+  matrix job reached 2 passes / 12 setup errors. This is not recorded as CI success.
+- Removed the forced base directory from pyproject.toml so pytest creates and
+  isolates its standard temporary directories on clean Windows/Linux checkouts.
+  Plugin code and the Windows-accepted 60,930-byte ZIP remain unchanged. Fresh
+  checkout verification and the replacement remote workflow are tracked below.
+- Agent clean-checkout preflight (no `.tmp` directory in the checkout): **116
+  unit tests passed, 99.18% core coverage; 14 integration tests passed on each
+  QGIS 3.44.15/Qt5 and 4.2.3/Qt6**. QGIS tests ran with a read-only repository
+  mount and standard container temporary directories. The Windows agent's existing
+  system pytest temp directory denied access, so this unit preflight set
+  PYTEST_DEBUG_TEMPROOT to a separate local scratch parent; that environment
+  override is not committed or required by the GitHub workflow. This is agent
+  verification, not the outstanding independent student reproduction gate.
