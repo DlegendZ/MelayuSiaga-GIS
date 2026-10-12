@@ -90,11 +90,13 @@ operated by Claude on Raynald's laptop under his instructions. Five callbacks
 restored styles without reopening; priority_table findings match Phase 4.
 
 Repository: [MelayuSiaga-GIS](https://github.com/DlegendZ/MelayuSiaga-GIS). Public
-release URL: pending remote CI; Raynald authorized main publication on 2026-10-13.
+release: [KM Flood Priority v1.0.0](https://github.com/DlegendZ/MelayuSiaga-GIS/releases/tag/v1.0.0).
+Release-source CI passed for unit tests and both QGIS versions; the attached ZIP
+is the unchanged Windows-accepted build, without sample_data.
 
 ![S2: native Windows product map and attributes](figures/S2_results.png)
 
 S2 is a genuine Windows screenshot, operated by Claude under Raynald's instructions,
 after reopening the result GeoPackage before the automatic GUI style loading fix.
-It demonstrates the package style, not a manual rerun of that fix. Include a release
-URL only when it exists; finalize the brief layout to at most two A4 pages.
+It demonstrates the package style, not a manual rerun of that fix. Finalize the
+brief layout to at most two A4 pages.

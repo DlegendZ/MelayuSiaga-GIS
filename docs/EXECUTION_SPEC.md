@@ -2,7 +2,7 @@
 
 **Document type:** Software Requirements Specification + Build Plan (combined), written for a coding agent.
 **Course:** GIS Final Project — "Spatial Problem Solving for Indonesian Cities and Provinces" (BINUS, lecturer: Fabian Surya Pramudya, Ph.D.)
-**Group:** Raynald Arvan Lim (`raynald.lim@binus.ac.id`), Alden Viriya Tanudjaja (`alden.tanudjaja@binus.ac.id`), Moses Handoyo (`moses.handoyo@binus.ac.id`). Three members confirmed by the user on 2026-10-12; lecturer approval is pending because R1 specifies two.
+**Group:** Raynald Arvan Lim (`raynald.lim@binus.ac.id`), Alden Viriya Tanudjaja (`alden.tanudjaja@binus.ac.id`), Moses Handoyo (`moses.handoyo@binus.ac.id`). Three members confirmed by the user on 2026-10-12; Raynald confirmed the group-specific exception to R1 on 2026-10-13.
 **Spec version:** 1.0 — 2026-10-12
 **Status:** Approved for execution
 
@@ -736,7 +736,7 @@ The agent drafts `docs/TECHNICAL_BRIEF.md` with **real numbers from the Phase 4 
 - [ ] No output or document uses "flood-prone", "risk", or "safe" claims beyond §2.3; NO_RECORD is labelled "≠ safe"; access without verified inputs is UNKNOWN.
 - [ ] Repo: README per §10.1, DATA_SOURCES with attribution, METHODOLOGY, USER_GUIDE, LICENSE.
 - [ ] Clean-clone reproduction succeeded by the second student.
-- [ ] CI green; tag `v1.0.0`; GitHub Release with the plugin ZIP.
+- [x] CI green; tag `v1.0.0`; GitHub Release with the plugin ZIP (2026-10-13; see PROGRESS).
 - [ ] Technical Brief: exactly ≤ 2 pages, contains all 7 required items, ≥ 3 quantified findings, product screenshot + repo URL + release URL.
 - [ ] `docs/PROGRESS.md` final entry summarizes versions tested and known limitations.
 

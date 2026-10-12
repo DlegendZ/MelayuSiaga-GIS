@@ -29,14 +29,16 @@ and brief language remains pending.
 
 ## Quick start for graders
 
-Raynald authorized merging to main and pushing to GitHub on 2026-10-13. The
-installable ZIP is currently local; its release awaits remote CI. The build excludes
+Download [KM Flood Priority v1.0.0](https://github.com/DlegendZ/MelayuSiaga-GIS/releases/tag/v1.0.0).
+The published ZIP is the unchanged package accepted on Windows: **60,930 bytes**,
+SHA-256 `b136fd06beb6f91f3eb8bf90dedcb77db1c4fe33b384bddee8de41a84e4fbfff`.
+[Release-source CI passed](https://github.com/DlegendZ/MelayuSiaga-GIS/actions/runs/38307508822)
+on unit tests and both QGIS versions. The build excludes
 `sample_data` by Raynald's §6.3 decision on 2026-10-13. Obtain working inputs using
 [Reproduce from scratch](#reproduce-from-scratch), or the separate local data bundle
 only if the lecturer authorizes its attachment.
 
-1. From a repository copy, build the ZIP with QGIS Python or ordinary Python:
-   `python scripts/package_plugin.py`. It creates `dist/km_flood_priority-1.0.0.zip`.
+1. Download `km_flood_priority-1.0.0.zip` from the release above.
 2. In QGIS: Plugins → Manage and Install Plugins → Install from ZIP; select that ZIP.
 3. Choose KM Flood Priority → Load sample data. The information message explains
    unresolved redistribution permission and points here. Prepare local inputs.
@@ -104,9 +106,9 @@ zero routes**; no average baseline distance is claimed. All nine RW need field c
 ## Reproduce from scratch
 
 For the group's next independent check, use
-[the clean-clone guide and result form](docs/REPRODUCIBILITY_CHECK.md). A local Git
-bundle provides the current branch without pushing; fresh preparation and an
-accepted-snapshot pipeline check are recorded separately.
+[the clean-clone guide and result form](docs/REPRODUCIBILITY_CHECK.md). Clone public
+`main` into a new directory; fresh preparation and an accepted-snapshot pipeline
+check are recorded separately. The earlier local Git bundle is an offline alternative.
 
 To explore the existing local inputs in desktop QGIS, run from OSGeo4W Shell:
 
@@ -261,10 +263,11 @@ only. Three Nihil impact pairs remain NULL, and two source evacuation/affected-c
 inconsistencies remain in notes. PPID checking was delegated to Claude by Raynald;
 it is not described as direct human row checking.
 
-Windows style recheck v2 passed. The demo, another
-member's clean-copy reproduction, lecturer alignment on framing/language, and the
-final two-page brief PDF remain pending. The three-member exception is confirmed.
-Remote CI/release checks will be recorded after the authorized main publication.
+Windows style recheck v2 passed. The desktop demo was opened and confirmed visible
+by Raynald; the optional demo recording, another member's clean-copy reproduction,
+lecturer alignment on framing/language, and the final two-page brief PDF remain
+pending. The three-member exception is confirmed. Main is published, release-source
+CI passed, and v1.0.0 is available with the installable plugin ZIP.
 
 ## Development
 

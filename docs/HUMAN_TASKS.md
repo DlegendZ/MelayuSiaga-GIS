@@ -73,5 +73,7 @@ to the lecturer only if the lecturer permits it. Never commit or release that bu
   [the clean-clone guide and report](REPRODUCIBILITY_CHECK.md); tester selection
   can wait until Alden or Moses is available. Then the group finalizes
   the [brief draft](TECHNICAL_BRIEF.md) to at most two A4 pages and exports the PDF.
-  Raynald authorized merge/push on 2026-10-13; remote CI/release are being prepared.
+  Main is published with green release-source CI and
+  [v1.0.0](https://github.com/DlegendZ/MelayuSiaga-GIS/releases/tag/v1.0.0).
+  No further merge/push or style recheck is needed for this unchanged plugin build.
 

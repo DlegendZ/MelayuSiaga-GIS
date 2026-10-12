@@ -13,10 +13,8 @@ Windows acquisition/preparation. No push is required for either path.
 
 ## Five steps on the tester's Windows laptop
 
-1. Copy `dist/MelayuSiaga-GIS-reproduce.bundle` and its adjacent `.info.txt` from
-   Raynald's laptop to your Downloads folder. This is a local Git source/history
-   bundle, not a public release. It excludes untracked datasets and dist artifacts.
-   Have Git and QGIS 3.44 LTR available. Open **OSGeo4W Shell** and check:
+1. Have Git, internet access and QGIS 3.44 LTR available. The repository's `main`
+   branch is now public. Open **OSGeo4W Shell** and check:
 
    ```bat
    git --version
@@ -28,18 +26,24 @@ Windows acquisition/preparation. No push is required for either path.
    setup help. README explains the full-path launcher alternative. Do not install
    Python packages into QGIS.
 
-2. Clone the bundle into a **new directory** using these cmd/OSGeo4W commands:
+2. Clone public `main` into a **new directory** using these cmd/OSGeo4W commands:
 
    ```bat
-   git clone --branch codex/flood-priority-foundation "%USERPROFILE%\Downloads\MelayuSiaga-GIS-reproduce.bundle" "%USERPROFILE%\MelayuSiaga-dryrun"
+   git clone --branch main https://github.com/DlegendZ/MelayuSiaga-GIS.git "%USERPROFILE%\MelayuSiaga-dryrun"
    cd /d "%USERPROFILE%\MelayuSiaga-dryrun"
    git log -1 --oneline
    git status --short
    ```
 
-   Confirm the commit agrees with the `.info.txt` file and initial status is empty.
+   Record the actual commit and confirm initial status is empty.
    If that destination already exists, choose a new name; preserve previous work.
    There should be no prepared inputs.gpkg or event CSV in this clean checkout.
+
+   Offline alternative: copy the earlier `dist/MelayuSiaga-GIS-reproduce.bundle`
+   and adjacent `.info.txt` from Raynald. Clone that file using
+   `--branch codex/flood-priority-foundation`, and confirm its commit/hash against
+   the info file. It is an older local source snapshot, not the published main/tag;
+   record that distinction. Original datasets and dist artifacts are excluded.
 
 3. Follow [README → Windows with QGIS Python](../README.md#windows-with-qgis-python)
    in order: fetch_admin_boundaries → build_inputs --prepare-bbox-only → fetch_osm
@@ -108,6 +112,8 @@ Overall result: PASS / FAIL / PARTIAL
 ```
 
 The group's two-page brief layout/PDF and lecturer framing/language alignment remain
-separate human steps. Raynald authorized main merge/push on 2026-10-13; remote CI,
-tag and GitHub Release status is recorded in PROGRESS. The optional video is not a
+separate human steps. Raynald authorized main merge/push on 2026-10-13;
+[release-source CI passed](https://github.com/DlegendZ/MelayuSiaga-GIS/actions/runs/38307508822),
+and [v1.0.0 is published](https://github.com/DlegendZ/MelayuSiaga-GIS/releases/tag/v1.0.0).
+Publication details are recorded in PROGRESS. The optional video is not a
 blocker for this reproduction check. The local bundle remains an offline alternative.

@@ -454,3 +454,34 @@ no-push instruction; this update does not claim global Phase 5/6 acceptance.
   PYTEST_DEBUG_TEMPROOT to a separate local scratch parent; that environment
   override is not committed or required by the GitHub workflow. This is agent
   verification, not the outstanding independent student reproduction gate.
+
+## 2026-10-13 — Green GitHub CI and v1.0.0 published
+
+1. Replacement remote [Plugin quality run 38307508822](https://github.com/DlegendZ/MelayuSiaga-GIS/actions/runs/38307508822)
+   **passed all three jobs** at commit **24e6e1400b383fbcd2b11bfbeee3d71e2f019395**:
+   unit/lint/format, QGIS 3.44.15-noble and QGIS 4.2.3-trixie. Fresh-run temporary
+   directory setup is resolved. Existing test acceptance is 116 unit tests with
+   99.18% core coverage and 14 integration tests per QGIS version.
+2. Published annotated tag **v1.0.0** at that green commit and the public
+   [KM Flood Priority 1.0.0 release](https://github.com/DlegendZ/MelayuSiaga-GIS/releases/tag/v1.0.0).
+   Its only uploaded asset is **km_flood_priority-1.0.0.zip**, **60,930 bytes**.
+   GitHub's asset digest matches the accepted Windows artifact:
+   `b136fd06beb6f91f3eb8bf90dedcb77db1c4fe33b384bddee8de41a84e4fbfff`.
+   Release preflight passed CRC, exact member-list/data exclusions, and all 31
+   plugin files matched current source after normalizing checkout CRLF/LF.
+   A fresh download from the public release matches the same SHA-256. The tag's
+   separate [CI run 38307664313](https://github.com/DlegendZ/MelayuSiaga-GIS/actions/runs/38307664313)
+   also passed all three jobs.
+3. Public main now provides code/docs/figures and the release provides the plugin.
+   Original datasets, generated GeoPackages, the preview project, the lecturer-only
+   processed-data ZIP and the local reproduction bundle remain uncommitted and
+   absent from release assets. README quick start now downloads the release ZIP;
+   the reproduction guide clones public main, with the older bundle as an explicitly
+   identified offline snapshot. Brief draft and human handoff link the real release.
+4. Desktop demo is running and confirmed visible by Raynald. Windows GUI/style
+   acceptance already applies to this exact unchanged release ZIP. Outstanding
+   human gates remain another member's independent fresh-preparation reproduction,
+   lecturer framing/language alignment, and final at-most-two-page brief PDF/submission.
+   The optional 30–60 second demo recording is separate. Phase 6/global submission
+   completion is not asserted. The historical no-push entries remain historical;
+   this publication follows Raynald's later explicit authorization.
