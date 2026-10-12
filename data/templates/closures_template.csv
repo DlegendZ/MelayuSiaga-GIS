@@ -1,0 +1,2 @@
+closure_id,event_date,road_ref_type,road_ref,verified,source_id,source_ref,notes
+# Example: <ID>,<YYYY-MM-DD>,<OSM_ID or NAME>,<road ID or name>,N,<source ID>,<locator>,<notes>

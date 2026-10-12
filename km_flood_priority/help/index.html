@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KM Flood Priority — User guide</title>
+<style>body{max-width:850px;margin:40px auto;padding:0 24px;font:16px/1.65 system-ui,sans-serif;color:#222}h1,h2{line-height:1.2}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:10px;text-align:left}code{background:#eee;padding:2px 5px}.limits{padding:16px;background:#fff5d7;border-left:4px solid #d99a00}</style>
+</head><body>
+<h1>KM Flood Priority</h1>
+<p>Verification priority based on recorded flood events at RW scale in Kelurahan Kampung Melayu, Kecamatan Jatinegara.</p>
+<p class="limits"><strong>No recorded event (≠ safe).</strong> Missing verified access evidence produces <strong>UNKNOWN</strong>. The plugin does not simulate inundation, predict future events or certify evacuation safety.</p>
+<h2>Run the full pipeline</h2>
+<ol>
+<li>Install the ZIP through Plugins → Manage and Install Plugins → Install from ZIP.</li>
+<li>Open KM Flood Priority → Run full pipeline… or find <code>kmflood:run_pipeline</code> in the Processing Toolbox.</li>
+<li>Select RW, roads, safe-point evidence and kelurahan boundary layers from your prepared <code>inputs.gpkg</code>; select the canonical event CSV and source registry CSV.</li>
+<li>Keep the documented thresholds, select a new output GeoPackage and run. Safe points and dated closures are optional; omission produces UNKNOWN access.</li>
+<li>Inspect priority, validation issues, access and run metadata. Open the result in a fresh project to check the embedded styles.</li>
+</ol>
+<p>Raynald's 2026-10-13 licensing decision excludes real sample data from the public ZIP: DKI boundary and PPID redistribution permission is unconfirmed. Load sample data displays an information message without adding layers. Prepare local data using <a href="https://github.com/DlegendZ/MelayuSiaga-GIS#reproduce-from-scratch">README → Reproduce from scratch → Windows with QGIS Python</a> in the repository; the same heading is in the local README.md. No additional packages are needed for the QGIS Python preparation path. Synthetic test data is never product sample data.</p>
+<h2>Algorithms</h2>
+<table><tr><th>Processing ID</th><th>Inputs → outputs</th></tr>
+<tr><td><code>kmflood:import_validate</code></td><td>Canonical CSVs, source registry and RW units → normalized events, retained duplicates, validation issues and summary. Row errors are excluded and reported; schema errors or zero valid rows stop processing.</td></tr>
+<tr><td><code>kmflood:test_access</code></td><td>RW units, roads, point targets and verified dated closures → access by RW/date, routes and graph stats. Empty EVENT_DATES means baseline; ALL uses closure dates.</td></tr>
+<tr><td><code>kmflood:compute_priority</code></td><td>Normalized events, optional access/scenario list and thresholds → priority polygons and table with an unassigned summary.</td></tr>
+<tr><td><code>kmflood:export_package</code></td><td>Analysis outputs, context and sources → eleven-layer GeoPackage with default styles and run metadata.</td></tr>
+<tr><td><code>kmflood:run_pipeline</code></td><td>All important inputs → the four child algorithms and result package. Blank EVENT_DATES uses imported dates.</td></tr></table>
+<h2>Default class rules</h2>
+<p>Countable records have known RW, accepted location confidence and no cross-source duplicate marker. Distinct dates with gaps of at most two days form one episode. Maximum recorded depth remains separate from recurrence.</p>
+<table><tr><th>Class</th><th>Rule, evaluated in order</th></tr>
+<tr><td>NO_RECORD</td><td>Zero countable records.</td></tr>
+<tr><td>HIGH</td><td>At least 3 episodes, plus either maximum depth ≥50 cm or CUT_OFF access.</td></tr>
+<tr><td>MEDIUM</td><td>At least 2 episodes, maximum depth ≥50 cm, or CUT_OFF access.</td></tr>
+<tr><td>VERIFY</td><td>Remaining recorded units; weak evidence needs checking.</td></tr></table>
+<p>Dashed outlines mark field-check needs. Hatch marks VERIFY; a dotted pattern marks NO_RECORD. Labels show episode counts. Scenario flags never alter classes. Shared source totals cannot be summed over exploded RW copies.</p>
+<p>The accepted 2025 working set has RW 04/05 HIGH (16 episodes each), RW 07/08 MEDIUM (one episode each), and five NO_RECORD units. RW 04/05 share the same 25 source rows for Jl. Kebon Pala II, RT 12–13 in RW 04 and RT 10–11 in RW 05. Do not add their episode counts or infer whole-RW inundation. Without Genangan, RW 04/05 remain HIGH with 15 episodes each; nine threshold combinations change no class. All access is UNKNOWN.</p>
+<h2>Access results</h2>
+<p>The undirected pedestrian graph uses road vertices rounded to 0.01 m. RW point-on-surface origins and targets snap to vertices within 50 m by default. One-way vehicle restrictions are ignored. Verified closures remove matching OSM IDs or normalized road names for the exact date.</p>
+<p>REACHABLE requires dated verified closure evidence and a path to usable target evidence. CUT_OFF requires that evidence and no path. Missing targets, off-network origins, baseline-only runs and dates without verified closures yield UNKNOWN. Including unverified targets flags the result and does not verify them.</p>
+<p>Green lines are reachable event paths; dashed grey lines are baseline paths. Red crosses on RW origins show CUT_OFF evidence. Zero-distance paths retain their distance/status row and have no line geometry.</p>
+<h2>Provenance and troubleshooting</h2>
+<p>CSVs are UTF-8, comma-separated; dates are ISO YYYY-MM-DD. Every source ID must be registered. Missing CRS, invalid geometry, duplicate RW IDs or missing fields require input correction. All spatial outputs use EPSG:32748.</p>
+<p><code>events.notes</code> preserves source verification and inconsistency notes. Unassigned evidence stays out of RW polygons. <code>run_info</code> records versions, UUID, UTC timestamp, parameters and actual event years.</p>
+<p>Use a new filename or explicitly enable OVERWRITE. Exports include default styles. The plugin has no extra runtime Python dependencies and performs no network requests.</p>
+<p>Roads and buildings: © OpenStreetMap contributors, ODbL.</p>
+</body></html>
+

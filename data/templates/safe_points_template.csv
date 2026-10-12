@@ -1,0 +1,2 @@
+sp_id,name,sp_type,capacity,lon,lat,verified,source_id,source_ref,notes
+# Example: <ID>,<name>,<type>,<capacity if known>,<longitude>,<latitude>,N,<source ID>,<locator>,<verification pending>

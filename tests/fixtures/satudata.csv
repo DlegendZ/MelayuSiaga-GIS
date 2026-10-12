@@ -1,0 +1,3 @@
+test_date,test_city,test_district,test_area,test_rw,test_depth,test_extra
+04/03/2025,TEST CITY,TEST DISTRICT,TESTVILLE,04,30-50 cm,ignored field
+05/03/2025,TEST CITY,OTHER DISTRICT,TESTVILLE,05,40,ignored field

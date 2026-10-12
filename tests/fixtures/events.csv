@@ -1,0 +1,4 @@
+event_id,source_id,source_ref,event_date,kota,kecamatan,kelurahan,rw_raw,rt_raw,address_raw,depth_raw,affected_rt_count,affected_kk,affected_people,duration_raw,location_confidence,verified,notes
+TEST-A,SYNTHETIC,row 1,2025-03-04,TEST CITY,TEST DISTRICT,TESTVILLE,RW 04,,,30-50 cm,,,,,RW,N,Synthetic test only
+TEST-B,SYNTHETIC,row 2,2025-03-05,TEST CITY,TEST DISTRICT,TESTVILLE,04/05,,,0.5 m,,,,,RW,N,Synthetic test only
+TEST-C,SYNTHETIC,row 3,2025-07-07,TEST CITY,TEST DISTRICT,TESTVILLE,,,,,,,,,KELURAHAN,N,Synthetic test only
