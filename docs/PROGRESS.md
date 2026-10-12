@@ -413,3 +413,23 @@ no-push instruction; this update does not claim global Phase 5/6 acceptance.
   bytes because of checkout newline conversion. This checks source/package handoff,
   not fresh acquisition, an independent student run or a public release. Local
   bundle commit/hash details are in dist/MelayuSiaga-GIS-reproduce.info.txt.
+
+## 2026-10-13 — Desktop demo and main publication authorized
+
+- Raynald explicitly requested running the project for viewing, merging the working
+  branch into main and pushing to GitHub. This supersedes the earlier no-push rule;
+  prior entries retain the historical authorization state. DKI/PPID data and the
+  local-only processed-data ZIP remain excluded from Git/public release.
+- Added scripts/prepare_demo.py: run real local inputs, load final GeoPackage styles
+  through the actual Processing result loader, save an explorable .qgz with map
+  extent and a tables/provenance group, optionally launch desktop QGIS. Existing
+  outputs are protected. The map starts with candidate points hidden; their layer
+  and unverified status remain available. No classification/access rules changed.
+- Native QGIS 3.44.15 demo run: **1.063 s**, zero validation errors, outputs
+  data/processed/demo_results.gpkg and MelayuSiaga_demo.qgz. Priority/targets/routes
+  use categorizedSymbol; roads/boundary use the designed single symbols. Raynald
+  confirmed the launched QGIS window is visible on his laptop. The preview project,
+  output data and run metadata remain local/gitignored.
+- GitHub access verified for DlegendZ/MelayuSiaga-GIS; remote default is main and
+  its fetched starting point is the initial commit. Next: merge/push, remote CI and
+  the spec's release ZIP. No remote success or release existence is claimed here.

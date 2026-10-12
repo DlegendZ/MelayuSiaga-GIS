@@ -90,7 +90,7 @@ operated by Claude on Raynald's laptop under his instructions. Five callbacks
 restored styles without reopening; priority_table findings match Phase 4.
 
 Repository: [MelayuSiaga-GIS](https://github.com/DlegendZ/MelayuSiaga-GIS). Public
-release URL: pending; no push/release is authorized.
+release URL: pending remote CI; Raynald authorized main publication on 2026-10-13.
 
 ![S2: native Windows product map and attributes](figures/S2_results.png)
 

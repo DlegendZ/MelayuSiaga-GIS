@@ -29,8 +29,8 @@ and brief language remains pending.
 
 ## Quick start for graders
 
-The installable ZIP is currently **local**; no public release has been published
-because the owner requested commits without push. The public plugin build excludes
+Raynald authorized merging to main and pushing to GitHub on 2026-10-13. The
+installable ZIP is currently local; its release awaits remote CI. The build excludes
 `sample_data` by Raynald's §6.3 decision on 2026-10-13. Obtain working inputs using
 [Reproduce from scratch](#reproduce-from-scratch), or the separate local data bundle
 only if the lecturer authorizes its attachment.
@@ -107,6 +107,19 @@ For the group's next independent check, use
 [the clean-clone guide and result form](docs/REPRODUCIBILITY_CHECK.md). A local Git
 bundle provides the current branch without pushing; fresh preparation and an
 accepted-snapshot pipeline check are recorded separately.
+
+To explore the existing local inputs in desktop QGIS, run from OSGeo4W Shell:
+
+```bat
+python-qgis-ltr scripts/prepare_demo.py --open
+```
+
+It runs the pipeline, saves `data/processed/MelayuSiaga_demo.qgz` and opens it in
+QGIS with the styled RW map and a tables/provenance group. Unverified candidate
+points remain available as a layer, initially hidden to keep the map readable.
+Outputs remain local; existing results are protected. For another run choose new
+`--output` and `--project` paths. The defaults require the prepared local inputs
+described below; original datasets are excluded from GitHub and the plugin ZIP.
 
 ### Windows with QGIS Python
 
@@ -251,8 +264,7 @@ it is not described as direct human row checking.
 Windows style recheck v2 passed. The demo, another
 member's clean-copy reproduction, lecturer alignment on framing/language, and the
 final two-page brief PDF remain pending. The three-member exception is confirmed.
-Remote CI/release checks
-cannot be claimed while the owner's no-push instruction remains in effect.
+Remote CI/release checks will be recorded after the authorized main publication.
 
 ## Development
 
@@ -274,8 +286,9 @@ standard library. Unit acceptance: **116 tests, 99.18% core coverage**.
 | Native Windows 3.44.15 | Two automated GUI regressions pass; desktop style recheck v2 PASSED in 1.16 s |
 
 Run container integration with `python3 -m pytest tests/qgis -q` using the Docker
-mount above. The CI matrix uses both exact tags; remote CI is unrun. Local commits
-only; **no push**. See [PROGRESS](docs/PROGRESS.md), [USER_GUIDE](docs/USER_GUIDE.md),
+mount above. The CI matrix uses both exact tags; publication was authorized on
+2026-10-13 and remote results are recorded in [PROGRESS](docs/PROGRESS.md).
+See [USER_GUIDE](docs/USER_GUIDE.md),
 [HUMAN_TASKS](docs/HUMAN_TASKS.md), and the [brief draft](docs/TECHNICAL_BRIEF.md).
 
 ## License

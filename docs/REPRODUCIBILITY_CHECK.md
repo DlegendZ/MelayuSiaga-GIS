@@ -108,5 +108,6 @@ Overall result: PASS / FAIL / PARTIAL
 ```
 
 The group's two-page brief layout/PDF and lecturer framing/language alignment remain
-separate human steps. Remote CI, tag and GitHub Release remain deferred by Raynald's
-no-push instruction. The optional video is not a blocker for this reproduction check.
+separate human steps. Raynald authorized main merge/push on 2026-10-13; remote CI,
+tag and GitHub Release status is recorded in PROGRESS. The optional video is not a
+blocker for this reproduction check. The local bundle remains an offline alternative.
