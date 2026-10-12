@@ -1,0 +1,2 @@
+event_id,source_id,source_ref,event_date,kota,kecamatan,kelurahan,rw_raw,rt_raw,address_raw,depth_raw,affected_rt_count,affected_kk,affected_people,duration_raw,location_confidence,verified,notes
+# Example: <source-specific ID>,<registered source ID>,<page or row>,<YYYY-MM-DD>,<city>,<district>,<kelurahan>,<RW as written>,<RT as written>,<address>,<depth>,<count>,<count>,<count>,<duration>,<confidence>,<Y or N>,<notes>

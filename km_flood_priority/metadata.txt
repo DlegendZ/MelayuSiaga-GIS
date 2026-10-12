@@ -1,0 +1,15 @@
+[general]
+name=KM Flood Priority
+qgisMinimumVersion=3.40
+qgisMaximumVersion=4.99
+description=Verification-priority and safe-point access analysis for recorded floods in Kelurahan Kampung Melayu, Jakarta Timur.
+about=Validates recorded events, groups episodes per RW, classifies verification priority, and tests access using verified safe points and road closures. Missing access evidence produces UNKNOWN. No recorded event does not mean safe.
+version=1.0.0
+author=Raynald Arvan Lim, Alden Viriya Tanudjaja, Moses Handoyo
+email=raynald.lim@binus.ac.id, alden.tanudjaja@binus.ac.id, moses.handoyo@binus.ac.id
+hasProcessingProvider=yes
+category=Analysis
+tags=flood,jakarta,priority,network analysis,evacuation,processing
+icon=icon.svg
+experimental=False
+

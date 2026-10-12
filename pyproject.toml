@@ -1,0 +1,19 @@
+[tool.pytest.ini_options]
+testpaths = ["tests/unit"]
+pythonpath = ["."]
+addopts = "-ra"
+
+[tool.coverage.run]
+source = ["km_flood_priority/core"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
