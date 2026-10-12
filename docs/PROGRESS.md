@@ -37,3 +37,38 @@
 - Phase 1 proceeds in parallel. Phase 3 remains gated by real `inputs.gpkg`, validated
   `events_all.csv`, source metadata, and known year coverage. No real-data finding is claimed.
 
+## 2026-10-12 — Phase 1 inputs prepared; event review pending
+
+- The user started Docker Desktop. Development runs use QGIS 3.44.15-Solothurn /
+  Python 3.12.3 from `qgis/qgis:3.44.15-noble`, image digest
+  `sha256:497c1629c68ced7735dc25c25e33ada0040f5144099e92b78fae978bdf233466`.
+  QGIS 4.x and Windows plugin acceptance are not tested yet.
+- Added acquisition, explicit Satu Data mapping, PPID extraction, merge validation,
+  and QGIS metric-input preparation scripts. Raw snapshots and checked CSVs cannot
+  be silently overwritten. All six command help checks pass without QGIS imports.
+- Acquired official administrative data: 9 RW (01–09), one kelurahan boundary.
+  Metric boundary area is 47.989568 ha; dissolved RW/kelurahan area ratio is
+  1.000000000008, meeting the ±5% gate; all prepared geometries are valid.
+- Derived the exact 1000 m metric buffer bbox before the OSM query. Clipped context
+  contains 3,154 road and 34,617 building features; 440 candidate safe points remain N.
+  `data/processed/inputs.gpkg` has five EPSG:32748 layers and was reopened and checked
+  in QGIS. Its SHA-256 is `a4be6c4a90bee76b5df32b30961b242b16a5c0604b2667a8e9e63ef410d7305a`.
+  The final preparation script was also rerun successfully to an independent `.tmp`
+  package with the same layer counts, checking every post-clip geometry and CRS.
+- The user downloaded the PPID 2025 PDF. Inspected all target-area tables visually,
+  including headerless continuation pages. The 18-column profile excludes the monthly
+  summary, handles April numeric impact cells and June RW labels without equals signs.
+  Full extraction yields 28 source rows / 56 normalized RW rows; zero schema errors
+  and no missing depths. The initial 15-row shortlist was incomplete and superseded.
+- Every PPID row remains `verified=N`, `location_confidence=UNKNOWN`. References
+  include viewer page, table, source NO and original date. Shared impact totals are
+  not allocated to individual RWs; Nihil remains NULL; source times do not imply a
+  next-day duration or verified road closure. A review guide is beside the draft.
+- Source registry contains DKI-RW, DKI-KEL, OSM-20261012 and PPID25 with checksums.
+  Downloaded real datasets remain gitignored pending redistribution confirmation.
+- Validation: 111 unit tests, Ruff lint, formatting and whitespace checks pass;
+  core coverage remains 99.18%. Phase 1 is not yet
+  accepted: human PPID verification, Satu Data availability per year, the final merged
+  event table and accepted year coverage remain pending. Phase 3 has not started.
+- All commits remain local; no push has been performed.
+

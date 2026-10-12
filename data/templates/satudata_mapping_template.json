@@ -1,0 +1,12 @@
+{
+  "column_map": {
+    "event_date": "<actual date column>",
+    "kota": "<actual city column>",
+    "kecamatan": "<actual district column>",
+    "kelurahan": "<actual kelurahan column>",
+    "rw_raw": "<actual RW codes column; never the count of affected RW>",
+    "depth_raw": "<actual depth column if present>"
+  },
+  "ignored_columns": ["<explicitly inspected columns that are not mapped>"],
+  "date_format": "%Y-%m-%d"
+}

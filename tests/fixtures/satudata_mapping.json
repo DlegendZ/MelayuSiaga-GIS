@@ -1,0 +1,12 @@
+{
+  "column_map": {
+    "event_date": "test_date",
+    "kota": "test_city",
+    "kecamatan": "test_district",
+    "kelurahan": "test_area",
+    "rw_raw": "test_rw",
+    "depth_raw": "test_depth"
+  },
+  "ignored_columns": ["test_extra"],
+  "date_format": "%d/%m/%Y"
+}

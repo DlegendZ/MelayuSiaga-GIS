@@ -11,4 +11,3 @@ def classFactory(iface):
     from .plugin import KMFloodPriorityPlugin
 
     return KMFloodPriorityPlugin(iface)
-

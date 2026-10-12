@@ -1,7 +1,7 @@
 [tool.pytest.ini_options]
 testpaths = ["tests/unit"]
 pythonpath = ["."]
-addopts = "-ra"
+addopts = "-ra --basetemp=.tmp/pytest"
 
 [tool.coverage.run]
 source = ["km_flood_priority/core"]
